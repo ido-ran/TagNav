@@ -11,13 +11,28 @@ TagNav.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'labelView'.w(),
-    
+    childViews: 'labelView bc mediaGrid'.w(),
+
     labelView: SC.LabelView.design({
-      layout: { centerX: 0, centerY: 0, width: 200, height: 18 },
-      textAlign: SC.ALIGN_CENTER,
-      tagName: "h1", 
-      value: "Welcome to SproutCore!"
+		layout: { left: 0, height: 30 },
+		value: 'Breadcrumb Tag Control'
+	}),
+	
+    bc: TagNav.TagBc.design({
+      layout: { left: 0, right: 0, height: 50, top: 50 },
+	  tagsBinding: 'TagNav.navigatorController.filterByTags',
+	  tagsToAddBinding: 'TagNav.navigatorController.tagsInFilter'
+    }),
+
+    mediaGrid: SC.GridView.design({
+	  layout: { left: 0, right: 0, top: 100, bottom: 30 },
+	  contentBinding: 'TagNav.releventMediaController.arrangedObjects',
+	  contentValueKey: 'title',
+	  columnWidth: 200,
+	  rowHeight: 200,
+	  isSelectable: NO,
+	  isEditable: NO,
+      exampleView: TagNav.MediaListItemView
     })
   })
 

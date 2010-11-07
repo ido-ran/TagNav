@@ -1,0 +1,635 @@
+
+.tagbc-view {
+	background: red;
+}
+
+.image-label {
+	color: white;
+	background: rgba(0,0,0,0.6);
+	font-size: x-large;
+	line-height:8em;
+}
+
+li
+{
+	list-style: none;
+}
+
+
+#tagscope
+{
+	background: #3274D0;
+}
+#tagscopenav
+{
+	background: #E9E9E9;
+	font-size: 100%;
+	height: 19px;
+	max-height: 19px;
+	min-height: 19px;
+}
+.urldetails #tagscopenav
+{
+	background: #3274D0;
+}
+#tagscopenav li
+{
+	_height: 19px;
+	float: left;
+	margin: 0;
+	min-height: 19px;
+	padding-right: 0;
+	position: relative;
+	zoom: 1;
+}
+#tagscopenav li a
+{
+	height: 16px;
+	line-height: 10px;
+}
+#tagscopenav li.scope
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: #6C6C6C
+static_url('del_sprite_tagScopeNav.png') 100% -1200px
+no-repeat;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 0 0 1em;
+}
+#tagscopenav li.scope:hover
+{
+	background-color: #4D4D4D;
+	background-position: 100%
+-1200px;
+}
+.is_ie7 #tagscopenav li a
+{
+	line-height: 11px;
+}
+#tagscopenav li.scope a.currscope
+{
+	color: #fff;
+	display: block;
+	float: left;
+	font-weight: bold;
+	height: 15px;
+	margin: 0;
+	padding: 4px
+14px 0 0;
+	text-decoration: none;
+}
+.userposts #tagscopenav.on
+{
+	background: #3274D0;
+}
+.userposts #tagscopenav.on li.scope
+{
+	background-image: static_url('currscope-user.bg.on.gif');
+}
+.userposts #tagscopenav.on li.type strong em
+{
+	background: #3274D0;
+	border-left: 1px
+solid white;
+}
+.userposts #tagscopenav.on #addurl,.userposts #tagscopenav.on #addtag
+{
+	_border: 1px solid #3274D0;
+}
+.settings #tagscopenav li.scope,
+.usertags #tagscopenav li.scope,
+.userposts #tagscopenav li.scope
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: #3274D0
+static_url('del_sprite_tagScopeNav.png') right -1200px
+no-repeat;
+}
+.settings #tagscopenav li.scope:hover,
+.usertags #tagscopenav li.scope:hover,
+.userposts #tagscopenav li.scope:hover
+{
+	background-color: #2261a0;
+	background-position: right
+-1200px;
+}
+.network #tagscopenav li.scope,
+.subscriptions #tagscopenav li.scope,
+.inbox #tagscopenav li.scope
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: #3274D0 static_url('del_sprite_tagScopeNav.png')
+right -200px no-repeat;
+}
+.network #tagscopenav li.scope:hover,
+.subscriptions #tagscopenav li.scope:hover,
+.inbox #tagscopenav li.scope:hover
+{
+	background-color: #2261a0;
+	background-position: right
+-0px;
+}
+#tagscopenav
+{
+	_padding-right: 9em;
+	padding-right: 8.4em;
+}
+#tagscopenav
+li.scope #scopechoices
+{
+	border: 1px
+solid
+#3274D0;
+	border-bottom-width: 2px;
+	border-right-width: 2px;
+	display: block;
+	left: 0;
+	margin: 1px 0 0
+0;
+	padding: 0;
+	position: absolute;
+	top: 18px;
+	width: 7em;
+	z-index: 9999;
+}
+#tagscopenav
+li.scope #scopechoices.hidden
+{
+	display: none;
+}
+#tagscopenav li.scope
+#scopechoices.shown
+{
+	display: block;
+}
+#tagscopenav li.scope #scopechoices
+li
+{
+	background: #fff;
+	border: none;
+	float: none;
+	text-indent: none;
+	width: 100%;
+}
+#tagscopenav
+li.scope #scopechoices li
+a
+{
+	background: #fff;
+	border-bottom: 1px solid white;
+	border-top: 1px
+solid white;
+	cursor: pointer;
+	display: block;
+	text-decoration: none;
+	width: 100%;
+}
+#tagscopenav
+li.scope #scopechoices li
+a:hover
+{
+	background: #3274D0;
+	border: 1px solid
+#3274D0;
+	color: #fff;
+	cursor: pointer;
+}
+#tagscopenav li.scope #scopechoices li a
+strong
+{
+	cursor: pointer;
+	display: block;
+	padding: 1px 10px 3px
+3px;
+	width: 6em;
+}
+#tagscopenav li.tag
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: transparent
+static_url('del_sprite_tagScopeNav.png') -12px -1000px
+no-repeat;
+	margin-left: -7px;
+	padding: 0 0 0
+7px;
+}
+#tagscopenav
+li.tag:hover
+{
+	background-position: -12px -800px;
+}
+#tagscopenav li.tag
+a
+{
+	background: #8E8E8E;
+	color: white;
+	height: 15px;
+	padding: 4px 0 0
+5px;
+	text-decoration: none;
+}
+#tagscopenav li.tag:hover a
+{
+	background-color: #6C6C6C;
+}
+#tagscopenav li.tag a.onlytag
+{
+	display: block;
+	float: left;
+	padding: 4px 0 0 5px;
+}
+#tagscopenav
+li.tag
+a.removetag
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: #8E8E8E
+static_url('del_sprite_tagScopeNav.png') 100% -1100px
+no-repeat;
+	display: block;
+	float: left;
+	height: 17px;
+	padding-top: 2px;
+	width: 17px;
+}
+#tagscopenav
+li.tag:hover
+a.removetag
+{
+	background-color: #6C6C6C;
+	background-position: 100%
+-900px;
+}
+#tagscopenav li.tag a.removetag:hover
+{
+	background-position: 100%
+-950px;
+}
+#tagscopenav li.first
+{
+	background-position: -12px
+-1000px;
+}
+#tagscopenav li.first:hover
+{
+	background-position: -12px
+-800px;
+}
+.is_ie6 #tagscopenav li.tag
+a.removetag:hover
+{
+	background-position: 100% -2704px;
+}
+.recent
+#tagscopenav li.first,.popular #tagscopenav
+li.first
+{
+	background-position: -12px -1000px;
+}
+.recent #tagscopenav
+li.first:hover,.popular #tagscopenav
+li.first:hover
+{
+	background-position: -12px -800px;
+}
+.inbox #tagscopenav
+li.tag
+{
+	background-position: -12px -400px;
+}
+.inbox #tagscopenav
+li.tag:hover
+{
+	background-position: -12px 0;
+}
+.inbox #tagscopenav li.tag
+a
+{
+	background-color: #5f7ca8;
+}
+.inbox #tagscopenav li.tag:hover
+a
+{
+	background-color: #2261a0;
+}
+.inbox #tagscopenav li.tag
+a.removetag
+{
+	background-position: 100% -500px;
+}
+.inbox #tagscopenav
+li.tag:hover
+a.removetag
+{
+	background-color: #2261a0;
+	background-position: 100%
+-100px;
+}
+.inbox #tagscopenav li.tag
+a.removetag:hover
+{
+	background-color: #2261a0;
+	background-position: 100%
+-150px;
+}
+.network #tagscopenav li.first,.subscriptions #tagscopenav
+li.first,.inbox #tagscopenav li.first
+{
+	background-position: -12px
+-200px;
+}
+.network #tagscopenav li.first:hover,.subscriptions
+#tagscopenav li.first:hover,.inbox #tagscopenav
+li.first:hover
+{
+	background-position: -12px -0px;
+}
+.inbox #tagscopenav
+li.first a
+{
+	background: #3274d0;
+}
+#tagscopenav li.tag a.removetag
+span
+{
+	display: none;
+}
+#tagscopenav li.tag
+.endtag
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: #8E8E8E static_url('del_sprite_tagScopeNav.png') 100%
+-1200px
+no-repeat;
+	display: block;
+	float: left;
+	padding: 4px 14px 0
+5px;
+}
+#tagscopenav
+li.type
+{
+	float: none;
+	text-align: right;
+}
+#tagscopenav li.type
+strong
+{
+	color: #fff;
+	display: block;
+	height: 100%;
+	padding: 0;
+	position: relative;
+}
+#tagscopenav
+li.type strong
+em
+{
+	background-color: #666;
+	color: #fff;
+	display: inline;
+	float: right;
+	height: 100%;
+	margin-left: 5px;
+	min-height: 19px;
+}
+#tagscopenav
+li.type strong span
+{
+	color: #404040;
+	display: block;
+	padding: 2px 5px 0
+5px;
+}
+#tagscopenav li.type strong
+span#tagScopeCount
+{
+	color: #fff;
+}
+.urldetails #tagscopenav li.type strong
+em
+{
+	background-color: #3274D0;
+	border-left: 2px solid #fff;
+}
+.network
+#tagscopenav li.tag .endtag,.subscriptions #tagscopenav li.tag
+.endtag,.inbox #tagscopenav li.tag .endtag
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: #3274D0
+static_url('del_sprite_tagScopeNav.png') 100% -1200px
+no-repeat;
+}
+.network
+#tagscopenav li.tag:hover .endtag,.subscriptions #tagscopenav
+li.tag:hover .endtag,.inbox #tagscopenav li.tag:hover
+.endtag
+{
+	background-color: #2261a0;
+	background-position: 100%
+-1200px;
+}
+#tagscopenav li.section
+{
+	background-position: -12px
+-200px;
+}
+#tagscopenav li.section:hover
+{
+	background-position: -12px
+0;
+}
+#tagscopenav li.section a.endtag,#tagscopenav li.section
+a
+{
+	background-color: #3274d0;
+	background-position: 100%
+-250px;
+}
+#tagscopenav li.section:hover a.endtag,#tagscopenav
+li.section:hover a
+{
+	background-color: #2261a0;
+	background-position: 100%
+-50px;
+}
+#tagscopenav li.bundle
+{
+	background-position: -12px
+-800px;
+}
+#tagscopenav li.bundle:hover
+{
+	background-position: -12px
+-600px;
+}
+#tagscopenav li.bundle a.endtag,#tagscopenav li.bundle
+a
+{
+	background-color: #6c6c6c;
+	background-position: 100%
+-800px;
+}
+#tagscopenav li.bundle:hover a.endtag,#tagscopenav
+li.bundle:hover a
+{
+	background-color: #333;
+	background-position: 100%
+-600px;
+}
+#tagscopenav li.bundle
+a.removetag
+{
+	background-color: #6C6C6C;
+	background-position: 100%
+-900px;
+}
+#tagscopenav li.bundle:hover
+a.removetag
+{
+	background-color: #333;
+	background-position: 100%
+-700px;
+}
+#tagscopenav li.bundle
+a.removetag:hover
+{
+	background-position: 100% -750px;
+}
+#tagscopenav
+li.for
+{
+	background-position: -12px -1250px;
+}
+#tagscopenav li.for
+a
+{
+	background-color: #7591BA;
+}
+#tagscopenav li.for
+a.removetag
+{
+	background-color: #7591BA;
+	background-position: 100%
+-1350px;
+}
+#tagscopenav li.for:hover
+{
+	background-position: -12px
+-400px;
+}
+#tagscopenav li.for:hover
+a
+{
+	background-color: #5f7ca8;
+}
+#tagscopenav li.for:hover
+a.removetag
+{
+	background-color: #5f7ca8;
+	background-position: 100%
+-500px;
+}
+#tagscopenav li.for a.removetag:hover
+{
+	background-position: 100%
+-550px;
+}
+#tagscopenav
+li.box
+{
+	_width: 12.6em;
+	margin-left: -5px;
+}
+#tagscopenav li.box
+form
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: static_url('del_sprite_tagScopeNav.png')
+100% -1200px
+no-repeat;
+	height: 19px;
+}
+#tagscopenav
+li.type
+{
+	_width: 12em;
+	float: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 12em;
+}
+#addurl,#addtag
+{
+	border: 1px
+solid #E9E9E9;
+	color: #999;
+	font-size: 100%;
+	height: 15px;
+	line-height: 15px;
+	margin: 0
+20px 0 10px;
+	padding: 0 2px
+2px;
+	width: 120px;
+}
+.is_ie #addurl,.is_ie
+#addtag
+{
+	margin-top: -1px;
+}
+.is_safari1 #addurl,is_safari2
+#addurl,.is_safari1 #addtag,.is_safari2
+#addtag
+{
+	font-size: 92%;
+	margin-top: -1px;
+}
+#addtagSubmit
+{
+	background: transparent;
+	background: static_url('del_sprite_smallIcons.png')
+0 -1140px no-repeat;
+	border: none;
+	color: transparent;
+	display: inline;
+	height: 14px;
+	margin: 0;
+	position: absolute;
+	right: 6px;
+	top: 3px;
+	width: 10px;
+}
+.jsEnabled
+#addtagSubmit
+{
+	display: none;
+}
+#addtagSubmit:hover
+{
+	background-position: 0
+-1171px;
+}
+.on #addtagSubmit
+{
+	display: inline;
+}
+.is_safari .on
+#addtagSubmit
+{
+	display: inline;
+}
+.is_safari
+#magicboxform
+{
+	width: 160px;
+}
+.is_safari1 .on #addtagSubmit,.is_safari2
+.on
+#addtagSubmit
+{
+	display: none!important;
+}

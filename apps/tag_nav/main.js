@@ -19,6 +19,10 @@ TagNav.main = function main() {
   // create multiple pages and panes.  
   TagNav.getPath('mainPage.mainPane').append() ;
 
+  var q = SC.Query.local(TagNav.Media);
+  var allMedia = TagNav.store.find(q);
+  TagNav.allMediaController.set('content', allMedia);
+
   // Step 2. Set the content property on your primary controller.
   // This will make your app come alive!
 
