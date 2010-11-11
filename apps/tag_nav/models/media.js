@@ -4,6 +4,11 @@
 // ==========================================================================
 /*globals TagNav */
 
+TagNav.MediaTypes = {
+  PICASAWEB: 'picasa',
+  YOUTUBE: 'youtube'
+};
+
 /** @class
 
   Media can describe photo album, video clip or audio clip on the web.

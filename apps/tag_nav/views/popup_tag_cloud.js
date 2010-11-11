@@ -27,10 +27,16 @@ TagNav.PopupTagCloud = SC.View.extend(
 
   render: function(context, firstTime) {
 	var tags = this.get('tags');
+	var emptyTagList = true;
 	for (var i in tags) {
+	  emptyTagList = false;
 	  var tag = i;
       var size = tags[i];
 	  context.push('<span style="font-size:%@em" class="tag">%@</span>'.fmt(size,tag));
+	}
+	
+	if (emptyTagList) {
+		context.push('<span>no more tags, sorry</span>');
 	}
   },
 

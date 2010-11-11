@@ -13,6 +13,21 @@
 TagNav.releventMediaController = SC.ArrayController.create(
 /** @scope TagNav.releventMediaController.prototype */ {
 
-	contentBinding: 'TagNav.navigatorController.releventMedias'
+  selectedMedia: null,
+  selectedMediaBinding: SC.Binding.single('TagNav.releventMediaController.selection'),
+
+  contentBinding: 'TagNav.navigatorController.releventMedias',
+
+  // Sent from the medias grid
+  mediaSelected: function() {
+	var selMedia = this.get('selectedMedia');
+	if (selMedia.get('type') == TagNav.MediaTypes.PICASAWEB) {
+	  // showing picasaweb album
+	} else 	if (selMedia.get('type') == TagNav.MediaTypes.YOUTUBE) {
+	  // showing youtube video
+	}
+	
+  },
+
 
 }) ;

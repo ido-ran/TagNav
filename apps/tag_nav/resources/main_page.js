@@ -11,7 +11,7 @@ TagNav.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'labelView bc mediaGrid'.w(),
+    childViews: 'labelView bc mainContent'.w(),
 
     labelView: SC.LabelView.design({
 		layout: { left: 0, height: 30 },
@@ -24,20 +24,53 @@ TagNav.mainPage = SC.Page.design({
 	  tagsToAddBinding: 'TagNav.navigatorController.tagsInFilter'
     }),
 
+    mainContent: SC.ContainerView.design({
+		layout: { left: 0, right: 0, top: 100, bottom: 30 },
+		nowShowingBinding: 'TagNav.navigatorController.mainContentNowShowing'
+    }),
+
+    cloudTagView: TagNav.PopupTagCloud.design({
+        layout: { width: 400 },
+	    tagsBinding: 'TagNav.navigatorController.tagsInFilter'
+	}),
+
     mediaGrid: SC.ScrollView.design({
-	    layout: { left: 0, right: 0, top: 100, bottom: 30 },
+	    layout: { left: 0, right: 0, top: 0, bottom: 0 },
 	    hasHorizontalScroller: YES,
         hasVerticalScroller: YES,
 	    borderStyle: SC.BORDER_NONE,
 		
 		contentView: SC.GridView.design({
 		  contentBinding: 'TagNav.releventMediaController.arrangedObjects',
+		  selectionBinding: 'TagNav.releventMediaController.selection',
 		  contentValueKey: 'title',
 		  columnWidth: 200,
 		  rowHeight: 200,
-		  isSelectable: NO,
 		  isEditable: NO,
-	      exampleView: TagNav.PicasaAlbumCoverListItemView
+	      exampleView: TagNav.PicasaAlbumCoverListItemView,
+	      action: 'mediaSelected',
+	      target: 'TagNav.releventMediaController',
+	      actOnSelect: YES
+	    })
+	 }),
+	
+	 picasaAlbumGrid: SC.ScrollView.design({
+	    layout: { left: 0, right: 0, top: 0, bottom: 0 },
+	    hasHorizontalScroller: YES,
+        hasVerticalScroller: YES,
+	    borderStyle: SC.BORDER_NONE,
+
+		contentView: SC.GridView.design({
+		  contentBinding: 'TagNav.picasaWebController.arrangedObjects',
+		  selectionBinding: 'TagNav.releventMediaController.selection',
+		  contentValueKey: 'title',
+		  columnWidth: 200,
+		  rowHeight: 200,
+		  isEditable: NO,
+	      exampleView: TagNav.PicasaAlbumCoverListItemView,
+	      action: 'mediaSelected',
+	      target: 'TagNav.releventMediaController',
+	      actOnSelect: YES
 	    })
 	 })
   })

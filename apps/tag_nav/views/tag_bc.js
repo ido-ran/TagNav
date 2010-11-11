@@ -42,7 +42,7 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 		  contentView: TagNav.PopupTagCloud.design({
             layout: { width: 400 },
 		    tagsBinding: 'TagNav.navigatorController.tagsInFilter'
-		  })	
+		  })
 		})
 	});
 	this._tagCloudPopup = SC.PickerPane.create({
@@ -105,7 +105,7 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 		c.push('<div id="tagscope">');
 		c.push('  <ul id="tagscopenav">');
 		c.push('    <li class="scope">');
-		c.push('      <a href="/tag" class="currscope" id="currscope">Tags</a>');
+		c.push('      <a class="currscope" id="currscope">Tags</a>');
 		c.push('    </li>');
 //		c.push('	<li class="tags">');
 //		c.push('       <ul>');
@@ -176,6 +176,12 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 	if (this.$('#addtagSubmit').within(elem)) {
 		// The add tag button was clicked
 		this._tagCloudPopup.popup(this, SC.PICKER_POINTER, [1,2,1]);
+	}
+	
+	if (this.$('#currscope').within(elem)) {
+		// The root Tags was clicked
+		var tags = this.get('tags');
+		while (tags.length > 0) tags.popObject();
 	}
 
 	return YES;

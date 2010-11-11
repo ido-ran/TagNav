@@ -6,7 +6,7 @@
 
 /** @class
 
-  (Document Your Controller Here)
+  Root controller for the application.
 
   @extends SC.ArrayController
 */
@@ -22,6 +22,9 @@ TagNav.navigatorController = SC.ObjectController.create(
 
   /* Hold the Media records that are relevent to the tags selected by the user. */
   releventMedias: [],
+
+  /* This property hold string path to the current main content view */
+  mainContentNowShowing: null,
 
   init: function() {
 	sc_super();
@@ -71,12 +74,14 @@ TagNav.navigatorController = SC.ObjectController.create(
 	var uniqMedia = SC.Set.create();
 
 	if (filterByTags == null || filterByTags.length == 0) {
+		this.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.cloudTagView');
 		if (medias != null) {
 		  medias.forEach(function(item) {
 		    self.addToTagHash(uniqTags, item.get('tags'), filterByTags);
  	      });
         }
  	} else {
+	  this.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.mediaGrid');
 	  medias.forEach(function(item) {
 		var itemTags = item.get('tags');
 		var hasAllTags = filterByTags.every(function(v) {
@@ -95,7 +100,7 @@ TagNav.navigatorController = SC.ObjectController.create(
 		}
 	  });
     }
-
+console.log(['nav', uniqTags]);
 	// remove tags we already filter by.
 	this.set('tagsInFilter', uniqTags);
 	
