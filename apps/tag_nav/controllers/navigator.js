@@ -57,24 +57,26 @@ TagNav.navigatorController = SC.ObjectController.create(
   }.observes("content"),
 
   _calcTagsInFilter: function() {
+	var self = this;
+    var medias = this.get('content');
 	var filterByTags = this.get('filterByTags');
 	var tagsInFilter = this.get('tagsInFilter');
 	var releventMedias = this.get('releventMedias');
 	
 	// clear all
-	tagsInFilter.removeObjects(tagsInFilter);
+	//tagsInFilter.removeObjects(tagsInFilter);
 	releventMedias.removeObjects(releventMedias);
 
-	if (filterByTags == null || filterByTags.get('length') == 0) {
-		var allTags = this.get('allTags');
-		allTags.forEach(function(val) {
-		  tagsInFilter.pushObject(val);	
-		});
- 	} else {
-	  var uniqTags = SC.Set.create();
-	  var uniqMedia = SC.Set.create();
-	  var medias = this.get('content');
+    var uniqTags = {};
+	var uniqMedia = SC.Set.create();
 
+	if (filterByTags == null || filterByTags.length == 0) {
+		if (medias != null) {
+		  medias.forEach(function(item) {
+		    self.addToTagHash(uniqTags, item.get('tags'), filterByTags);
+ 	      });
+        }
+ 	} else {
 	  medias.forEach(function(item) {
 		var itemTags = item.get('tags');
 		var hasAllTags = filterByTags.every(function(v) {
@@ -89,21 +91,26 @@ TagNav.navigatorController = SC.ObjectController.create(
 			uniqMedia.push(item);
 
 			// Add the tags of this item
-			itemTags.forEach(function(tag) {
-			  uniqTags.push(tag);	
-			});
+			self.addToTagHash(uniqTags, itemTags, filterByTags);
 		}
 	  });
-	
-	  // remove tags we already filter by.
-	  var x = uniqTags.toArray();
-	  x.removeObjects(filterByTags);
-	  this.set('tagsInFilter', x);
-	
-	  var x = uniqMedia.toArray();
-	  // TODO: sort
-	  this.set('releventMedias', x);
     }
+
+	// remove tags we already filter by.
+	this.set('tagsInFilter', uniqTags);
+	
+	var x = uniqMedia.toArray();
+	// TODO: sort
+    this.set('releventMedias', x);
   },
+
+  addToTagHash: function(tagHash, itemTags, filterByTags) {
+	itemTags.forEach(function(tag) {
+	  if (filterByTags.indexOf(tag) == -1) {
+		  if (tagHash[tag] === undefined) tagHash[tag]=1;
+		  else tagHash[tag] += 1;
+	  }
+	});
+  }
 
 }) ;

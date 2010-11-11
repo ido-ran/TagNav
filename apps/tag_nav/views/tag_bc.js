@@ -18,15 +18,37 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 //  contentDisplayProperties: ['tags'],
 
   tags: [],
-  tagsToAdd: [],
+  tagsToAdd: {},
 
   _tags: null,
+
+  _tagCloudPopup: null,
+  _tagCloudView: null,
 
   init: function() {
 	sc_super();
 	
 	this._tagnav_tagbd_tagsDidReplace();
 	this._tagnav_tagbd_tagsToAddDidReplace();
+	
+	this._tagCloudView = SC.View.design({
+		layout: { width: 400, height: 200 },
+		childViews: 'theList'.w(),
+		theList: SC.ScrollView.design({
+		  layout: { width: 400, height: 200 },
+		  shouldAutoResize: YES,
+		  hasHorizontalScroller: NO,
+		  hasVerticalScroller: YES,
+		  contentView: TagNav.PopupTagCloud.design({
+            layout: { width: 400 },
+		    tagsBinding: 'TagNav.navigatorController.tagsInFilter'
+		  })	
+		})
+	});
+	this._tagCloudPopup = SC.PickerPane.create({
+		layout: { width: 400, height: 200 },
+		contentView: this._tagCloudView
+	});
   },
 
   /**
@@ -53,11 +75,11 @@ TagNav.TagBc = SC.View.extend(SC.Control,
   called when the entier tagsToAdd collection reassign.
   */
   _tagnav_tagbd_tagsToAddDidReplace: function() {
-	var currTags = this._tagsToAdd;
-	if (currTags) currTags.removeObserver('[]', this, this._tagnav_tagbd_tagsToAddDidChange);
+//	var currTags = this._tagsToAdd;
+//	if (currTags) currTags.removeObserver('[]', this, this._tagnav_tagbd_tagsToAddDidChange);
 
-	var tagsToAdd = this.get('tagsToAdd');
-	tagsToAdd.addObserver('[]', this, this._tagnav_tagbc_tagsToAddDidChange);
+//	var tagsToAdd = this.get('tagsToAdd');
+//	tagsToAdd.addObserver('[]', this, this._tagnav_tagbc_tagsToAddDidChange);
 	
 	this.updateTagsToAdd();
   }.observes('tags'),
@@ -89,8 +111,8 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 //		c.push('       <ul>');
 		tags.forEach(function(tag, idx) {
 		  var liClass = idx == 0 ? 'tag first' : 'tag';
-		  c.push('<li class="%@"><a class="onlytag" href="/tag/">%@</a>'.fmt(liClass, tag));
-	      c.push('  <a class="removetag" href="?removetag=blogs"><span>[x]</span></a></li>');
+		  c.push('<li class="%@"><a class="onlytag">%@</a>'.fmt(liClass, tag));
+	      c.push('  <a class="removetag"><span>[x]</span></a></li>');
 		});
 //		c.push('<li class="tag first"><a class="onlytag" href="/tag/blogs">blogs</a>');
 //        c.push('  <a class="removetag" href="?removetag=blogs"><span>[x]</span></a></li>');
@@ -100,13 +122,6 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 //		c.push('        <form>');
 		c.push('            <input type="hidden" name="tagtype" id="addtagType" value="tag">');
 //		c.push('            <input type="text" size="25" name="addtag" id="addtag" autocomplete="off" value="Type another tag">');
-		c.push('            <select name="addtag" id="addtag">');
-		c.push('            <option></option>');
-		c.push('            <option>tag1</option>');
-		c.push('            <option>tag2</option>');
-		c.push('            <option>tag3</option>');
-		c.push('            <option>tag4</option>');
-		c.push('            </select>');
 		c.push('            <input type="submit" name="addtagSubmit" value="" id="addtagSubmit">');
 //		c.push('        </form>');
 		c.push('    </li>');
@@ -140,6 +155,29 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 
   _input_DidChange: function(evt) {
 	console.log('selected!');
+	return YES;
+  },
+
+  mouseDown: function(evt) {
+	var elem = evt.target;
+
+	var onlyTagQry = this.$('.onlytag');
+	var remTagQry = this.$('.removetag');
+
+	for (var i in remTagQry) {
+		var remTagElem = remTagQry[i];
+		if (elem == remTagElem) {
+			var onlyTagElem = SC.$(onlyTagQry[i]).first();
+			var tags = this.get('tags');
+			tags.removeObject(onlyTagElem.text());
+        }
+	}
+	
+	if (this.$('#addtagSubmit').within(elem)) {
+		// The add tag button was clicked
+		this._tagCloudPopup.popup(this, SC.PICKER_POINTER, [1,2,1]);
+	}
+
 	return YES;
   },
 /*

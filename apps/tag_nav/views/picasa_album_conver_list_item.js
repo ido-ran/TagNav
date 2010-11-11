@@ -6,11 +6,11 @@
 
 /** @class
 
-  (Document Your View Here)
+  Represent a single PicasaWeb album cover in a grid.
 
   @extends SC.View
 */
-TagNav.MediaListItemView = SC.View.extend(
+TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
 /** @scope TagNav.MediaListItemView.prototype */ {
 
   createChildViews: function(){ 
@@ -25,21 +25,6 @@ TagNav.MediaListItemView = SC.View.extend(
     ); 
     childViews.push(photoView);
 
-    var albumUrl = content.get('url');
-	$.ajax({
-		url: albumUrl + '?alt=json',
-		dataType: 'jsonp',
-		success: function(data) {
-			// Take the largest thumbnail (there are usually 3).
-			//var thumbnails = data.feed.entry[0].media$group.media$thumbnail;
-			//var icon = thumbnails[thumbnails.length-1].url;
-			var icon = data.feed.icon.$t.replace(new RegExp("/s160-c/", "g"), "/");
-			icon = icon + '?imgmax=200&crop=1';
-			photoView.set('value', icon);
-	    }
-	});
-
-
     var titleView = this.createChildView( 
       SC.LabelView.extend({ 
         layout: { bottom: 0, centerX: 0, top: 170, width: 200, height: 30 }, 
@@ -53,6 +38,24 @@ TagNav.MediaListItemView = SC.View.extend(
 	  titleView.classNames.push('image-label');
     }
     childViews.push(titleView); 
+
+	var albumUrl = content.get('url');
+	$.ajax({
+		url: albumUrl + '?alt=json',
+		dataType: 'jsonp',
+		success: function(data) {
+			SC.run(function() {
+				// Extract the album cover
+				var icon = data.feed.icon.$t.replace(new RegExp("/s160-c/", "g"), "/");
+				icon = icon + '?imgmax=200&crop=1';
+				photoView.set('value', icon);
+			
+				// Extract the album name
+				var title = data.feed.title.$t;
+				titleView.set('value', title);
+			});
+	    }
+	});
 
     this.set('childViews', childViews); 
   } 

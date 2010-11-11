@@ -15,6 +15,14 @@ li
 	list-style: none;
 }
 
+.tagcloud-view {
+	overflow: auto;
+	width: 100%;
+}
+
+.tagcloud-view .tag {
+	margin: 5px;
+}
 
 #tagscope
 {
@@ -591,15 +599,14 @@ solid #E9E9E9;
 #addtagSubmit
 {
 	background: transparent;
-	background: static_url('del_sprite_smallIcons.png')
-0 -1140px no-repeat;
+	background: static_url('del_sprite_smallIcons.png') 0 -1140px no-repeat;
 	border: none;
 	color: transparent;
 	display: inline;
 	height: 14px;
-	margin: 0;
+	margin: 0;;
 	position: absolute;
-	right: 6px;
+	left: 6px;
 	top: 3px;
 	width: 10px;
 }

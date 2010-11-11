@@ -19,21 +19,27 @@ TagNav.mainPage = SC.Page.design({
 	}),
 	
     bc: TagNav.TagBc.design({
-      layout: { left: 0, right: 0, height: 50, top: 50 },
+      layout: { left: 0, right: 0, height: 40, top: 50 },
 	  tagsBinding: 'TagNav.navigatorController.filterByTags',
 	  tagsToAddBinding: 'TagNav.navigatorController.tagsInFilter'
     }),
 
-    mediaGrid: SC.GridView.design({
-	  layout: { left: 0, right: 0, top: 100, bottom: 30 },
-	  contentBinding: 'TagNav.releventMediaController.arrangedObjects',
-	  contentValueKey: 'title',
-	  columnWidth: 200,
-	  rowHeight: 200,
-	  isSelectable: NO,
-	  isEditable: NO,
-      exampleView: TagNav.MediaListItemView
-    })
+    mediaGrid: SC.ScrollView.design({
+	    layout: { left: 0, right: 0, top: 100, bottom: 30 },
+	    hasHorizontalScroller: YES,
+        hasVerticalScroller: YES,
+	    borderStyle: SC.BORDER_NONE,
+		
+		contentView: SC.GridView.design({
+		  contentBinding: 'TagNav.releventMediaController.arrangedObjects',
+		  contentValueKey: 'title',
+		  columnWidth: 200,
+		  rowHeight: 200,
+		  isSelectable: NO,
+		  isEditable: NO,
+	      exampleView: TagNav.PicasaAlbumCoverListItemView
+	    })
+	 })
   })
 
 });

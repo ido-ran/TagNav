@@ -12,19 +12,19 @@ TagNav.Media.FIXTURES = [
      title: "Pinat Chai",
      type: "picasa",
      url: 'http://picasaweb.google.com/data/feed/api/user/ido.ran/album/1500300708',
-     tags: ['b','a','c','d','e'] },
+     tags: ['טיולים','d','חיות'] },
 
    { _id: '2',
      title: "Euro trip",
      type: "picasa",
      url: 'http://picasaweb.google.com/data/feed/api/user/ido.ran/album/pjqRsF',
-     tags: ['a','c','e'] },
+     tags: ['a','טיולים','חיות'] },
 
    { _id: '3',
      title: "Green",
      type: "youtube",
      url: 'http://3',
-     tags: ['a','b','e'] },
+     tags: ['a','b','חיות'] },
 
    { _id: '4',
      title: "Blue",
@@ -36,6 +36,6 @@ TagNav.Media.FIXTURES = [
      title: "Spot",
      type: "picasa",
      url: 'http://picasaweb.google.com/data/feed/api/user/ido.ran/album/kEaeBF',
-     tags: ['c'] }
+     tags: ['טיולים'] }
 
 ];
