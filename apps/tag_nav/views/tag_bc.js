@@ -147,14 +147,9 @@ TagNav.TagBc = SC.View.extend(SC.Control,
   },
 
   _input_DidKeyDown: function(evt) {
-	console.log(['keydown_out', evt]);
-    SC.run(function() {
-      console.log(['keydown_in', evt]);
-    }, this);
   },
 
   _input_DidChange: function(evt) {
-	console.log('selected!');
 	return YES;
   },
 

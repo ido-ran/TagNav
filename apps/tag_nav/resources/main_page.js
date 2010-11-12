@@ -62,7 +62,7 @@ TagNav.mainPage = SC.Page.design({
 
 		contentView: SC.GridView.design({
 		  contentBinding: 'TagNav.picasaWebController.arrangedObjects',
-		  selectionBinding: 'TagNav.releventMediaController.selection',
+		  selectionBinding: 'TagNav.picasaWebController.selection',
 		  contentValueKey: 'title',
 		  columnWidth: 200,
 		  rowHeight: 200,

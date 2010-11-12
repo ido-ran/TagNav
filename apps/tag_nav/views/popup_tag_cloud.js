@@ -21,7 +21,6 @@ TagNav.PopupTagCloud = SC.View.extend(
   called when the entier tags collection reassign.
   */
   _tagnav_tagcloud_tagsDidReplace: function() {
-	console.log('tags changed');
 	this.updateLayer();
   }.observes('tags'),
 

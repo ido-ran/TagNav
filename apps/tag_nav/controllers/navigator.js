@@ -100,7 +100,7 @@ TagNav.navigatorController = SC.ObjectController.create(
 		}
 	  });
     }
-console.log(['nav', uniqTags]);
+
 	// remove tags we already filter by.
 	this.set('tagsInFilter', uniqTags);
 	

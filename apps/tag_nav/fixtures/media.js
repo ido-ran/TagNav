@@ -11,13 +11,15 @@ TagNav.Media.FIXTURES = [
    { _id: '1',
      title: "Pinat Chai",
      type: "picasa",
-     url: 'http://picasaweb.google.com/data/feed/api/user/ido.ran/album/1500300708',
+     user: 'ido.ran',
+     album: '1500300708',
      tags: ['טיולים','d','חיות'] },
 
    { _id: '2',
      title: "Euro trip",
      type: "picasa",
-     url: 'http://picasaweb.google.com/data/feed/api/user/ido.ran/album/pjqRsF',
+     user: 'ido.ran',
+     album: 'pjqRsF',
      tags: ['a','טיולים','חיות'] },
 
    { _id: '3',
@@ -35,7 +37,41 @@ TagNav.Media.FIXTURES = [
    { _id: '5',
      title: "Spot",
      type: "picasa",
-     url: 'http://picasaweb.google.com/data/feed/api/user/ido.ran/album/kEaeBF',
+     user: 'ido.ran',
+     album: 'kEaeBF',
+     tags: ['טיולים'] },
+
+   { _id: '6',
+     title: "Zoo",
+     type: "picasa",
+     user: 'ido.ran',
+     album: '1500300238',
+     tags: ['טיולים','d','חיות'] },
+
+   { _id: '7',
+     title: "France trip",
+     type: "picasa",
+     user: 'ido.ran',
+     album: 'pjqRsF',
+     tags: ['a','טיולים','חיות'] },
+
+   { _id: '8',
+     title: "Yellow",
+     type: "youtube",
+     url: 'http://3',
+     tags: ['a','b','חיות'] },
+
+   { _id: '9',
+     title: "Orange",
+     type: "youtube",
+     url: 'http://4',
+     tags: ['b'] },
+
+   { _id: '10',
+     title: "Dot",
+     type: "picasa",
+     user: 'ido.ran',
+     album: 'kEaeBg',
      tags: ['טיולים'] }
 
 ];
