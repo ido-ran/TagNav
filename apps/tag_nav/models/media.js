@@ -4,6 +4,9 @@
 // ==========================================================================
 /*globals TagNav */
 
+sc_require('views/picasa_album_cover_list_item');
+sc_require('views/you_tube_cover_list_item');
+
 TagNav.MediaTypes = {
   PICASAWEB: 'picasa',
   YOUTUBE: 'youtube'
@@ -24,6 +27,17 @@ TagNav.Media = SC.Record.extend(
   title: SC.Record.attr(String),
   type: SC.Record.attr(String),
   url: SC.Record.attr(String),
-  tags: SC.Record.attr(Array)
+  tags: SC.Record.attr(Array),
 
+  createCoverExampleView: function() {
+	var ev, type = this.get('type');
+	if (type == TagNav.MediaTypes.PICASAWEB) {
+		ev = TagNav.PicasaAlbumCoverListItemView;
+	} else if (type == TagNav.MediaTypes.YOUTUBE) {
+		ev = TagNav.YouTubeCoverListItemView;
+	} else {
+		throw "Invalid media type";
+	}
+	return ev;
+  }.property('type').cacheable()
 }) ;

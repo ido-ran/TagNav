@@ -4,6 +4,8 @@
 // ==========================================================================
 /*globals TagNav */
 
+//sc_require('views/you_tube_video');
+
 // This page describes the main user interface for your application.  
 TagNav.youtubeVideoPage = SC.Page.design({
 
@@ -22,12 +24,9 @@ TagNav.youtubeVideoPage = SC.Page.design({
       target: 'TagNav.releventMediaController',
     }),
 
-    mainContent: SC.ContainerView.design({
-	    layout: { left: 0, right: 0, top: 100, bottom: 0 },
-	    contentView: SC.LabelView.design({
-		  layout: { height: 30, width: 50 },
-		  value: 'welcome to YouTube'
-	    })
+	mainContent: TagNav.YouTubeVideoView.design({
+       layout: { width: 640, height: 505, centerX: 0, centerY: 0 },
+       valueBinding: 'TagNav.youTubeVideoController.youTubeVideoUrl'
     })
 	
   })

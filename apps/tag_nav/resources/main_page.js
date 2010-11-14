@@ -30,7 +30,7 @@ TagNav.mainPage = SC.Page.design({
     }),
 
     cloudTagView: TagNav.PopupTagCloud.design({
-        layout: { width: 400 },
+        layout: { left: 0, right: 0 },
 	    tagsBinding: 'TagNav.navigatorController.tagsInFilter'
 	}),
 
@@ -47,7 +47,8 @@ TagNav.mainPage = SC.Page.design({
 		  columnWidth: 200,
 		  rowHeight: 200,
 		  isEditable: NO,
-	      exampleView: TagNav.PicasaAlbumCoverListItemView,
+		  contentExampleViewKey: 'createCoverExampleView',
+	      //exampleView: TagNav.PicasaAlbumCoverListItemView,
 	      action: 'mediaSelected',
 	      target: 'TagNav.releventMediaController',
 	      actOnSelect: YES

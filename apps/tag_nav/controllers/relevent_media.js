@@ -38,6 +38,9 @@ TagNav.releventMediaController = SC.ArrayController.create(
 	  this._activeMediaView = view;	
 	} else 	if (selMedia.get('type') == TagNav.MediaTypes.YOUTUBE) {
 	  // showing youtube video
+	  var videoID = selMedia.get('url');
+	  var videoInfo = TagNav.youTubeVideoMgr.getVideo(videoID);
+	  TagNav.youTubeVideoController.set('content', videoInfo);
 	  var view = TagNav.getPath('youtubeVideoPage.mainPane');
 	  view.append();
 	  this._activeMediaView = view;

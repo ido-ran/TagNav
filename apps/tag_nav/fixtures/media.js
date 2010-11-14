@@ -25,13 +25,13 @@ TagNav.Media.FIXTURES = [
    { _id: '3',
      title: "Green",
      type: "youtube",
-     url: 'http://3',
+     url: 'o9PyesRGPEg',
      tags: ['a','b','חיות'] },
 
    { _id: '4',
      title: "Blue",
      type: "youtube",
-     url: 'http://4',
+     url: 'KRWtacoYwjk',
      tags: ['b'] },
 
    { _id: '5',
@@ -58,13 +58,13 @@ TagNav.Media.FIXTURES = [
    { _id: '8',
      title: "Yellow",
      type: "youtube",
-     url: 'http://3',
+     url: 'MTO95118Qv4',
      tags: ['a','b','חיות'] },
 
    { _id: '9',
      title: "Orange",
      type: "youtube",
-     url: 'http://4',
+     url: 'KEqYmiEBK34',
      tags: ['b'] },
 
    { _id: '10',

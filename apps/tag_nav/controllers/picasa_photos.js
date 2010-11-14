@@ -32,7 +32,12 @@ TagNav.picasaPhotosController = SC.ArrayController.create(
             nextKeys: [39, 83]
         }, //-- overrule defaults is needed
 
-  photoClicked: function() {
+	photoClicked: function() {
+		var photoInfo = this.get('selectedPhoto');
+		jQuery.slimbox(photoInfo.get('largeUrl'), photoInfo.get('title'), this.slimbox_config);
+	  },
+		
+  photoClicked_all_photos: function() {
 	var photoInfo = this.get('selectedPhoto');
 	var albumInfo = TagNav.picasaAlbumController.get('content');
 	

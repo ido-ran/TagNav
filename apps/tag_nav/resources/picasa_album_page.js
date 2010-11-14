@@ -33,7 +33,7 @@ TagNav.picasaAlbumPage = SC.Page.design({
 
     mainContent: SC.ContainerView.design({
 	    layout: { left: 0, right: 0, top: 100, bottom: 0 },
-	    nowShowing: 'TagNav.picasaAlbumPage.mainPane.picasaAlbumGrid'
+	    nowShowingBinding: 'TagNav.picasaAlbumController.mainContentNowShowing'
     }),
 	
 	picasaAlbumGrid: SC.ScrollView.design({
@@ -56,7 +56,8 @@ TagNav.picasaAlbumPage = SC.Page.design({
 	 }),
 	
 	 slideShowView: SC.WebView.design({
-	    layout: { left: 0, right: 0, top: 0, bottom: 0 }
+	    layout: { left: 0, right: 0, top: 0, bottom: 0 },
+	    valueBinding: 'TagNav.picasaAlbumController.slideShowUrl'
 	  })
   })
 
