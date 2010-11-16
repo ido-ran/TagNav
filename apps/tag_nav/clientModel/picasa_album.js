@@ -30,8 +30,28 @@ TagNav.PicasaAlbum = SC.Object.extend(
   All the photos in the album */
   photos: null,
 
+  activeThumbnailIndex: -1,
+  activeThumbnailUrl: null,
+
   init: function() {
     sc_super();
-    this.photos = [];	
-  }
+    this.photos = [];
+  },
+
+   __tagnav_activeThumbnailIndexDidChanged: function() {
+	var activeThumbnailIndex = this.get('activeThumbnailIndex');
+	if (activeThumbnailIndex == -1) {
+	  this.set('activeThumbnailUrl', this.get('thumbnailUrl'));
+	} else {
+		var photo = this.get('photos').objectAt(activeThumbnailIndex);
+		if (photo != null) {
+			var photoThumbnail = photo.get('thumbnailUrl');
+			this.set('activeThumbnailUrl', photoThumbnail);
+	    }
+	}
+   }.observes('activeThumbnailIndex'),
+
+   __tagnav_thumbnailUrlDidChanged: function() {
+	this.set('activeThumbnailUrl', this.get('thumbnailUrl'));
+   }.observes('thumbnailUrl')
 }) ;
