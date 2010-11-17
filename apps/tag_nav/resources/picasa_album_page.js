@@ -10,29 +10,37 @@ sc_require('views/picasa_photo_list_item');
 TagNav.picasaAlbumPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-    childViews: 'labelView back slideshowButton mainContent'.w(),
+    childViews: 'albumTitleView logoView back slideshowButton mainContent'.w(),
 
-    labelView: SC.LabelView.design({
-		layout: { left: 0, height: 30 },
-		value: 'Picasa Album View'
+	logoView: SC.ImageView.design({
+		layout: { right: 30, height: 30, top: 0, width: 30 },
+		value: static_url('picasa.gif')
+	}),
+	
+	albumTitleView: SC.LabelView.design({
+	  layout: { right: 75, height: 30, left: 300, top: 5 },
+	  valueBinding: "TagNav.picasaAlbumController.title",
+	  textAlign: SC.ALIGN_RIGHT,
+	  fontWeight: SC.BOLD_WEIGHT,
+	  classNames: ['page-title']
 	}),
 	
     back: SC.ButtonView.design({
-      layout: { left: 0, width: 100, height: 40, top: 50 },
+      layout: { left: 5, width: 100, height: 40, top: 5 },
 	  title: 'go back',
       action: 'goBack',
       target: 'TagNav.releventMediaController',
     }),
 
     slideshowButton: SC.ButtonView.design({
-      layout: { left: 130, width: 100, height: 40, top: 50 },
+      layout: { left: 130, width: 100, height: 40, top: 5 },
 	  title: 'Slideshow',
       action: 'startSlideshow',
       target: 'TagNav.picasaAlbumController',
     }),
 
     mainContent: SC.ContainerView.design({
-	    layout: { left: 0, right: 0, top: 100, bottom: 0 },
+	    layout: { left: 0, right: 0, top: 50, bottom: 0 },
 	    nowShowingBinding: 'TagNav.picasaAlbumController.mainContentNowShowing'
     }),
 	

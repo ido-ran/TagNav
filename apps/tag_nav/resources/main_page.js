@@ -15,7 +15,7 @@ TagNav.mainPage = SC.Page.design({
 
     labelView: SC.LabelView.design({
 		layout: { left: 0, height: 30 },
-		value: 'Breadcrumb Tag Control'
+		value: 'PhotoBook'
 	}),
 	
     bc: TagNav.TagBc.design({

@@ -13,6 +13,8 @@
 TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
 /** @scope TagNav.MediaListItemView.prototype */ {
 
+  classNames: ['picasa-album-cover'],
+
   albumInfo: null,
 
   createChildViews: function(){ 
@@ -35,17 +37,25 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
 
     var titleView = this.createChildView( 
       SC.LabelView.extend({ 
-        layout: { bottom: 0, centerX: 0, top: 170, width: 200, height: 30 }, 
+        layout: { bottom: 0, centerX: 0, width: 200, height: 35 }, 
         content: albumInfo, 
         valueBinding: SC.binding('.title', albumInfo),
 		textAlign: SC.ALIGN_CENTER
       }) 
     ); 
 
-    if (-1 == titleView.classNames.indexOf('image-label')) {
-	  titleView.classNames.push('image-label');
+    if (-1 == titleView.classNames.indexOf('media-title')) {
+	  titleView.classNames.push('media-title');
     }
     childViews.push(titleView); 
+
+    var picasaLogoView = this.createChildView(
+	  SC.ImageView.extend({
+	    layout: { top: 5, right: 10, width: 26, height: 26 },
+	    value: static_url('picasa.gif')	
+	  })
+	);
+	childViews.push(picasaLogoView);
 
     this.set('childViews', childViews); 
   },

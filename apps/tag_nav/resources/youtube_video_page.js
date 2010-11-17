@@ -10,11 +10,19 @@
 TagNav.youtubeVideoPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-    childViews: 'labelView back mainContent'.w(),
-
-    labelView: SC.LabelView.design({
-		layout: { left: 0, height: 30 },
-		value: 'Youtube Video View'
+    childViews: 'titleView logoView back mainContent'.w(),
+	
+	logoView: SC.ImageView.design({
+		layout: { right: 30, height: 30, top: 0, width: 42 },
+		value: static_url('YouTubeLogo.gif')
+	}),
+	
+	titleView: SC.LabelView.design({
+	  layout: { right: 75, height: 30, top: 5 },
+	  valueBinding: 'TagNav.youTubeVideoController.title',
+	  textAlign: SC.ALIGN_RIGHT,
+	  fontWeight: SC.BOLD_WEIGHT,
+	  classNames: ['page-title']
 	}),
 	
     back: SC.ButtonView.design({
