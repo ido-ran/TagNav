@@ -21,6 +21,10 @@ TagNav.PicasaPhoto = SC.Object.extend(
 	return "%@?imgmax=200&crop=1".fmt(this.get('content'));
   }.property('content').cacheable(),
 
+  smallThumbnailUrl: function() {
+	return "%@?imgmax=200&crop=1".fmt(this.get('content'));
+  }.property('content').cacheable(),
+
   largeUrl: function() {
 	return "%@?imgmax=800&crop=1".fmt(this.get('content'));
   }.property('content').cacheable()

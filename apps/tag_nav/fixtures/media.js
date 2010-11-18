@@ -8,7 +8,7 @@ sc_require('models/media');
 
 TagNav.Media.FIXTURES = [
 
-   { _id: '1',
+	   { _id: '1',
      title: "Pinat Chai",
      type: "picasa",
      user: 'ido.ran',
@@ -96,6 +96,6 @@ TagNav.Media.FIXTURES = [
      title: "einharod video 1",
      type: "youtube",
      url: 'FjqYQD8xnT0',
-     tags: ['חגים'] },
+     tags: ['חגים'] }
 
 ];

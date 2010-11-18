@@ -27,6 +27,14 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
 	var albumInfo = TagNav.picasaAlbumMgr.getAlbum(albumUser, albumID, content.get('title'));
     this.albumInfo = albumInfo;
 
+    var backThumbnailView = this.createChildView( 
+      SC.ImageView.extend({ 
+        layout: {top: 0, centerX: 0, width: 200, height: 200},
+        valueBinding: SC.binding('.thumbnailUrl', albumInfo)
+      }) 
+    ); 
+    childViews.push(backThumbnailView);
+
     var photoView = this.createChildView( 
       SC.ImageView.extend({ 
         layout: {top: 0, centerX: 0, width: 200, height: 200},
@@ -56,7 +64,7 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
 	  })
 	);
 	childViews.push(picasaLogoView);
-
+	
     this.set('childViews', childViews); 
   },
 

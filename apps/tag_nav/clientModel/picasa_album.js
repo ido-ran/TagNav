@@ -45,7 +45,7 @@ TagNav.PicasaAlbum = SC.Object.extend(
 	} else {
 		var photo = this.get('photos').objectAt(activeThumbnailIndex);
 		if (photo != null) {
-			var photoThumbnail = photo.get('thumbnailUrl');
+			var photoThumbnail = photo.get('smallThumbnailUrl');
 			this.set('activeThumbnailUrl', photoThumbnail);
 	    }
 	}

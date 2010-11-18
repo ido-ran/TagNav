@@ -35,7 +35,8 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 				var icon = data.feed.icon.$t.replace(new RegExp("/s160-c/", "g"), "/");
 				icon = icon + '?imgmax=200&crop=1';
 				album.set('thumbnailUrl', icon);
-			
+			    SC.imageCache.loadImage(icon);
+
 				// Extract the album name
 				var title = data.feed.title.$t;
 				album.set('title', title);
@@ -48,6 +49,9 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 				  photo.set('title', e.title.$t);
 				  photo.set('content', e.content.src);
 				  album.photos.pushObject(photo);
+				
+				  // Start caching the image
+				  SC.imageCache.loadImage(photo.get('smallThumbnailUrl'));
 				});
 				
 				// Extract slide show link
