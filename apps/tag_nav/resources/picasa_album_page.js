@@ -10,33 +10,43 @@ sc_require('views/picasa_photo_list_item');
 TagNav.picasaAlbumPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-    childViews: 'albumTitleView logoView back slideshowButton mainContent'.w(),
+    childViews: 'backgroundView topBar mainContent'.w(),
 
-	logoView: SC.ImageView.design({
-		layout: { right: 30, height: 30, top: 0, width: 30 },
-		value: static_url('picasa.gif')
+	backgroundView: SC.View.design({
+		backgroundColor: 'black'
 	}),
-	
-	albumTitleView: SC.LabelView.design({
-	  layout: { right: 75, height: 30, left: 300, top: 5 },
-	  valueBinding: "TagNav.picasaAlbumController.title",
-	  textAlign: SC.ALIGN_RIGHT,
-	  fontWeight: SC.BOLD_WEIGHT,
-	  classNames: ['page-title']
-	}),
-	
-    back: SC.ButtonView.design({
-      layout: { left: 5, width: 100, height: 40, top: 5 },
-	  title: 'go back',
-      action: 'goBack',
-      target: 'TagNav.releventMediaController',
-    }),
 
-    slideshowButton: SC.ButtonView.design({
-      layout: { left: 130, width: 100, height: 40, top: 5 },
-	  title: 'Slideshow',
-      action: 'startSlideshow',
-      target: 'TagNav.picasaAlbumController',
+    topBar: SC.ToolbarView.design({
+	  layout: { top: 0, left: 0, right: 0, height: 50 },
+	  anchorLocation: SC.ANCHOR_TOP,
+	  childViews: 'albumTitleView logoView back slideshowButton'.w(),
+
+		logoView: SC.ImageView.design({
+			layout: { right: 30, height: 30, centerY: 0, width: 30 },
+			value: static_url('picasa.gif')
+		}),
+	
+		albumTitleView: SC.LabelView.design({
+		  layout: { right: 75, height: 30, left: 300, centerY: 0 },
+		  valueBinding: "TagNav.picasaAlbumController.title",
+		  textAlign: SC.ALIGN_RIGHT,
+		  fontWeight: SC.BOLD_WEIGHT,
+		  classNames: ['page-title']
+		}),
+	
+	    back: SC.ButtonView.design({
+	      layout: { centerY: 0, left: 10, width: 100, height: 30 },
+		  title: 'go back',
+	      action: 'goBack',
+	      target: 'TagNav.releventMediaController',
+	    }),
+
+	    slideshowButton: SC.ButtonView.design({
+	      layout: { centerY: 0, left: 130, width: 100, height: 30 },
+		  title: 'Slideshow',
+	      action: 'startSlideshow',
+	      target: 'TagNav.picasaAlbumController',
+	    })
     }),
 
     mainContent: SC.ContainerView.design({
@@ -51,6 +61,7 @@ TagNav.picasaAlbumPage = SC.Page.design({
 	    borderStyle: SC.BORDER_NONE,
 
 		contentView: SC.GridView.design({
+	      backgroundColor: 'black',
 		  contentBinding: 'TagNav.picasaPhotosController.arrangedObjects',
 		  selectionBinding: 'TagNav.picasaPhotosController.selection',
           exampleView: TagNav.PicasaPhotoListItemView,

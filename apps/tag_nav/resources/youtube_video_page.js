@@ -10,26 +10,41 @@
 TagNav.youtubeVideoPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-    childViews: 'titleView logoView back mainContent'.w(),
+    childViews: 'backgroundView topBar videoPreviewImage mainContent'.w(),
 	
-	logoView: SC.ImageView.design({
-		layout: { right: 30, height: 30, top: 0, width: 42 },
-		value: static_url('YouTubeLogo.gif')
+	backgroundView: SC.View.design({
+		backgroundColor: 'black'
 	}),
 	
-	titleView: SC.LabelView.design({
-	  layout: { right: 75, height: 30, top: 5 },
-	  valueBinding: 'TagNav.youTubeVideoController.title',
-	  textAlign: SC.ALIGN_RIGHT,
-	  fontWeight: SC.BOLD_WEIGHT,
-	  classNames: ['page-title']
-	}),
+	topBar: SC.ToolbarView.design({
+	  layout: { top: 0, left: 0, right: 0, height: 50 },
+	  anchorLocation: SC.ANCHOR_TOP,
+	  childViews: 'titleView logoView back'.w(),
+    
+		logoView: SC.ImageView.design({
+			layout: { right: 30, height: 30, centerY: 0, width: 42 },
+			value: static_url('YouTubeLogo.gif')
+		}),
 	
-    back: SC.ButtonView.design({
-      layout: { left: 0, width: 100, height: 40, top: 50 },
-	  title: 'go back',
-      action: 'goBack',
-      target: 'TagNav.releventMediaController',
+		titleView: SC.LabelView.design({
+		  layout: { right: 75, height: 30, left: 300, centerY: 0 },
+		  valueBinding: 'TagNav.youTubeVideoController.title',
+		  textAlign: SC.ALIGN_RIGHT,
+		  fontWeight: SC.BOLD_WEIGHT,
+		  classNames: ['page-title']
+		}),
+	
+	    back: SC.ButtonView.design({
+	      layout: { centerY: 0, left: 10, width: 100, height: 30 },
+		  title: 'go back',
+	      action: 'goBack',
+	      target: 'TagNav.releventMediaController',
+	    })
+	}),
+
+    videoPreviewImage: SC.ImageView.design({
+	  layout: { width: 640, height: 505, centerX: 0, centerY: 0 },
+	  valueBinding: 'TagNav.youTubeVideoController.thumbnailUrl'
     }),
 
 	mainContent: TagNav.YouTubeVideoView.design({

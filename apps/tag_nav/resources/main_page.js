@@ -11,7 +11,11 @@ TagNav.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'labelView bc mainContent'.w(),
+    childViews: 'backgroundView labelView bc mainContent'.w(),
+
+	backgroundView: SC.View.design({
+		backgroundColor: 'black'
+	}),
 
     labelView: SC.LabelView.design({
 		layout: { left: 0, height: 30 },
@@ -41,6 +45,7 @@ TagNav.mainPage = SC.Page.design({
 	    borderStyle: SC.BORDER_NONE,
 		
 		contentView: SC.GridView.design({
+		  backgroundColor: 'black',
 		  contentBinding: 'TagNav.releventMediaController.arrangedObjects',
 		  selectionBinding: 'TagNav.releventMediaController.selection',
 		  contentValueKey: 'title',

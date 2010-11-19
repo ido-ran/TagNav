@@ -44,13 +44,17 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
     childViews.push(photoView);
 
     var titleView = this.createChildView( 
-      SC.LabelView.extend({ 
-        layout: { bottom: 0, centerX: 0, width: 200, height: 35 }, 
-        content: albumInfo, 
-        valueBinding: SC.binding('.title', albumInfo),
-		textAlign: SC.ALIGN_CENTER
+      SC.View.extend({ 
+        layout: { bottom: 0, centerX: 0, width: 200, height: 40 }, 
+        childViews: 'lbl'.w(),
+        lbl: SC.LabelView.design({
+	        layout: { left: 5, right: 5, top: 0, bottom: 5 },
+	      	content: albumInfo, 
+	        valueBinding: SC.binding('.title', albumInfo),
+			textAlign: SC.ALIGN_CENTER
+        })
       }) 
-    ); 
+    );
 
     if (-1 == titleView.classNames.indexOf('media-title')) {
 	  titleView.classNames.push('media-title');
@@ -59,11 +63,19 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
 
     var picasaLogoView = this.createChildView(
 	  SC.ImageView.extend({
-	    layout: { top: 5, right: 10, width: 26, height: 26 },
+	    layout: { top: 5, right: 20, width: 26, height: 26 },
 	    value: static_url('picasa.gif')	
 	  })
 	);
 	childViews.push(picasaLogoView);
+	
+	var albumMask = this.createChildView(
+      SC.ImageView.extend({
+	    layout: { top: 0, centerX: 0, width: 200, height: 200 },
+	    value: static_url('album_mask.png')
+      })
+    );
+    childViews.push(albumMask);
 	
     this.set('childViews', childViews); 
   },

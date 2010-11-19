@@ -1,6 +1,6 @@
 
 .tagbc-view {
-	background: red;
+
 }
 
 .image-label {
@@ -9,11 +9,9 @@
 	line-height:8em;
 }
 
-.media-title {
+.sc-view.media-title {
 	color: white;
 	background: rgba(0,0,0, 0.6);
-	font-size: x-large;
-	line-height:8em;
 	text-overflow:ellipsis;
 	overflow: hidden;
 }
@@ -24,11 +22,11 @@
 }
 
 .picasa-album-cover {
-	border: 1px solid #3274D0;
+	/*border: 1px solid #3274D0;*/
 }
 
 .youtube-album-cover {
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 }
 
 li
