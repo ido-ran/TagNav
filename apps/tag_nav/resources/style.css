@@ -29,18 +29,15 @@
 	/*border: 1px solid red;*/
 }
 
-li
-{
-	list-style: none;
-}
-
 .tagcloud-view {
 	overflow: auto;
 	width: 100%;
 }
 
-.tagcloud-view .tag {
+.tagcloud-view li {
 	margin: 5px;
+	list-style: none;
+	float: left;
 }
 
 #tagscope

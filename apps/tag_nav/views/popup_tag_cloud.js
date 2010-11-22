@@ -13,7 +13,7 @@
 TagNav.PopupTagCloud = SC.View.extend(
 /** @scope TagNav.PopupTagCloud.prototype */ {
 
-  tagName: 'div',
+  tagName: 'ul',
   classNames: ['tagcloud-view'],
   tags: {}, // Must be hash between tags and their weight
 
@@ -31,7 +31,7 @@ TagNav.PopupTagCloud = SC.View.extend(
 	  emptyTagList = false;
 	  var tag = i;
       var size = tags[i];
-	  context.push('<span style="font-size:%@em" class="tag">%@</span>'.fmt(size,tag));
+	  context.push('<li style="font-size:%@em" class="tag">%@</li>'.fmt(size,tag));
 	}
 	
 	if (emptyTagList) {
