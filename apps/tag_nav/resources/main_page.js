@@ -49,7 +49,7 @@ TagNav.mainPage = SC.Page.design({
 	  
 	  welcomeMessage: SC.LabelView.design({
 	    layout: { top: 10, height: 40 },
-	    value: "welcome to photobook"	
+	    value: "_welcome".loc()
       }),
 
 	  whatIsTags: SC.LabelView.design({
