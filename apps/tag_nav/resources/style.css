@@ -29,20 +29,29 @@
 	/*border: 1px solid red;*/
 }
 
-.tagcloud-view {
+.sc-view.tagcloud-view {
 	overflow: auto;
 	width: 100%;
+	margin: 0px;
 }
 
 .tagcloud-view li {
 	margin: 5px;
 	list-style: none;
 	float: left;
+	line-height: 1;
+	color: white;
+}
+
+.tagcloud-view li:hover {
+	background: white;
+	color: black;
 }
 
 #tagscope
 {
-	background: #3274D0;
+	_background: #3274D0;
+	background: gray;
 }
 #tagscopenav
 {

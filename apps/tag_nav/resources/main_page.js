@@ -11,19 +11,25 @@ TagNav.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'backgroundView labelView bc mainContent'.w(),
+    childViews: 'backgroundView topBar bc mainContent'.w(),
 
 	backgroundView: SC.View.design({
 		backgroundColor: 'black'
 	}),
-
-    labelView: SC.LabelView.design({
-		layout: { left: 0, height: 30 },
-		value: 'PhotoBook'
-	}),
+	
+	topBar: SC.ToolbarView.design({
+	  layout: { top: 0, left: 0, right: 0, height: 50 },
+	  anchorLocation: SC.ANCHOR_TOP,
+	  childViews: 'labelView'.w(),
+	
+	    labelView: SC.LabelView.design({
+			layout: { left: 0, height: 30 },
+			value: 'PhotoBook'
+		})
+    }),
 	
     bc: TagNav.TagBc.design({
-      layout: { left: 0, right: 0, height: 40, top: 50 },
+      layout: { left: 0, right: 0, height: 30, top: 50 },
 	  tagsBinding: 'TagNav.navigatorController.filterByTags',
 	  tagsToAddBinding: 'TagNav.navigatorController.tagsInFilter'
     }),
@@ -36,6 +42,20 @@ TagNav.mainPage = SC.Page.design({
     cloudTagView: TagNav.PopupTagCloud.design({
         layout: { left: 0, right: 0 },
 	    tagsBinding: 'TagNav.navigatorController.tagsInFilter'
+	}),
+	
+	welcomeView: SC.View.design({
+	  childViews: 'welcomeMessage whatIsTags'.w(),
+	  
+	  welcomeMessage: SC.LabelView.design({
+	    layout: { top: 10, height: 40 },
+	    value: "welcome to photobook"	
+      }),
+
+	  whatIsTags: SC.LabelView.design({
+	    layout: { top: 50, height: 40 },
+	    value: "this is tags"	
+      })
 	}),
 
     mediaGrid: SC.ScrollView.design({

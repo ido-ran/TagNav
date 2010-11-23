@@ -21,7 +21,7 @@ TagNav.PicasaPhotoListItemView = SC.View.extend(
 
     var photoView = this.createChildView( 
       SC.ImageView.extend({ 
-        layout: {top: 0, centerX: 0, width: 200, height: 200},
+        layout: {top: 0, centerX: 0, width: 180, height: 180},
         valueBinding: SC.binding('.thumbnailUrl', content)
       })
     );

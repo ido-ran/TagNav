@@ -31,22 +31,14 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 	this._tagnav_tagbd_tagsDidReplace();
 	this._tagnav_tagbd_tagsToAddDidReplace();
 	
-	this._tagCloudView = SC.View.design({
-		layout: { width: 400, height: 200 },
-		childViews: 'theList'.w(),
-		theList: SC.ScrollView.design({
-		  layout: { width: 400, height: 200 },
-		  shouldAutoResize: YES,
-		  hasHorizontalScroller: NO,
-		  hasVerticalScroller: YES,
-		  contentView: TagNav.PopupTagCloud.design({
-            layout: { width: 400 },
-		    tagsBinding: 'TagNav.navigatorController.tagsInFilter'
-		  })
-		})
-	});
+	this._tagCloudView = 
+	  TagNav.PopupTagCloud.design({
+	    layout: { width: 580 },
+	    backgroundColor: 'black',
+	    tagsBinding: 'TagNav.navigatorController.tagsInFilter'
+	  });
 	this._tagCloudPopup = SC.PickerPane.create({
-		layout: { width: 400, height: 200 },
+		layout: { width: 600, height: 400 },
 		contentView: this._tagCloudView
 	});
   },
@@ -170,6 +162,14 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 	
 	if (this.$('#addtagSubmit').within(elem)) {
 		// The add tag button was clicked
+		var l = this.get('layer');
+		if (l == null) return;
+		var height = l.offsetHeight;
+		var width = l.offsetWidth;
+		var top = l.offsetTop;
+		
+		this._tagCloudPopup.set('layout', { width: width * 0.7, height: document.height * 0.8 - top });
+		this._tagCloudPopup.contentView.set('layout', { width: width * 0.7 });
 		this._tagCloudPopup.popup(this, SC.PICKER_POINTER, [1,2,1]);
 	}
 	

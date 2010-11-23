@@ -55,7 +55,7 @@ TagNav.picasaAlbumPage = SC.Page.design({
     }),
 	
 	picasaAlbumGrid: SC.ScrollView.design({
-	    layout: { left: 0, right: 0, top: 0, bottom: 0 },
+	    layout: { left: 0, right: 0, top: 20, bottom: 0 },
 	    hasHorizontalScroller: YES,
         hasVerticalScroller: YES,
 	    borderStyle: SC.BORDER_NONE,

@@ -74,7 +74,7 @@ TagNav.navigatorController = SC.ObjectController.create(
 	var uniqMedia = SC.Set.create();
 
 	if (filterByTags == null || filterByTags.length == 0) {
-		this.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.cloudTagView');
+		this.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.welcomeView');
 		if (medias != null) {
 		  medias.forEach(function(item) {
 		    self.addToTagHash(uniqTags, item.get('tags'), filterByTags);
