@@ -20,38 +20,25 @@ TagNav.releventMediaController = SC.ArrayController.create(
 
   contentBinding: 'TagNav.navigatorController.releventMedias',
 
-  _activeMediaView: null,
-
   // Sent from the medias grid
   mediaSelected: function() {
 	var selMedia = this.get('selectedMedia');
 
 	if (selMedia.get('type') == TagNav.MediaTypes.PICASAWEB) {
 	  // showing picasaweb album
-	  var albumUser = selMedia.get('user');
-	  var albumID = selMedia.get('album');
-	  var albumInfo = TagNav.picasaAlbumMgr.getAlbum(albumUser, albumID);
-	  
-	  TagNav.picasaAlbumController.set('content', albumInfo);
-	  var view = TagNav.getPath('picasaAlbumPage.mainPane');
-	  view.append();
-	  this._activeMediaView = view;	
+      var splitID = selMedia.get('id').split('/');
+	  var albumUser = splitID[0];
+	  var albumID = splitID[1];
+
+	  //SC.routes.set('location', 'picasa/%@/%@'.fmt(albumUser, albumID));
+	  TagNav.sendAction('picasa', this, { userID: albumUser, albumID: albumID });
 	} else 	if (selMedia.get('type') == TagNav.MediaTypes.YOUTUBE) {
 	  // showing youtube video
-	  var videoID = selMedia.get('url');
-	  var videoInfo = TagNav.youTubeVideoMgr.getVideo(videoID);
-	  TagNav.youTubeVideoController.set('content', videoInfo);
-	  var view = TagNav.getPath('youtubeVideoPage.mainPane');
-	  view.append();
-	  this._activeMediaView = view;
+	  var videoID = selMedia.get('id');
+	  //SC.routes.set('location', 'youtube/%@'.fmt(videoID));
+      TagNav.sendAction('youtube', this, { videoID: videoID });
 	}
 	
-  },
-
-  goBack: function() {
-    this._activeMediaView.remove();
-    this._activeMediaView = null;
   }
-
 
 }) ;

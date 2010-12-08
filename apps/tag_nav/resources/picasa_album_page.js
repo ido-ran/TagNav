@@ -11,6 +11,7 @@ TagNav.picasaAlbumPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
     childViews: 'backgroundView topBar mainContent'.w(),
+	defaultResponder: TagNav,
 
 	backgroundView: SC.View.design({
 		backgroundColor: 'black'
@@ -37,8 +38,7 @@ TagNav.picasaAlbumPage = SC.Page.design({
 	    back: SC.ButtonView.design({
 	      layout: { centerY: 0, left: 10, width: 100, height: 30 },
 		  title: 'go back',
-	      action: 'goBack',
-	      target: 'TagNav.releventMediaController',
+	      action: 'goBack'
 	    }),
 
 	    slideshowButton: SC.ButtonView.design({

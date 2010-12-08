@@ -12,6 +12,7 @@ TagNav.mainPage = SC.Page.design({
   // load.
   mainPane: SC.MainPane.design({
     childViews: 'backgroundView topBar bc mainContent'.w(),
+	defaultResponder: TagNav,
 
 	backgroundView: SC.View.design({
 		backgroundColor: 'black'

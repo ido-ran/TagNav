@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   TagNav.allMediaController
+// Project:   TagNav.picasaAlbumMgr
 // Copyright: ©2010 My Company, Inc.
 // ==========================================================================
 /*globals TagNav */
@@ -11,7 +11,7 @@
   @extends SC.Object
 */
 TagNav.picasaAlbumMgr = SC.Object.create(
-/** @scope TagNav.allMediaController.prototype */ {
+/** @scope TagNav.picasaAlbumMgr.prototype */ {
 
   albums: {},
 

@@ -5,18 +5,16 @@
 /*globals TagNav */
 
 /** @class
+ 
+ Root controller for the application.
+ 
+ @extends SC.ArrayController
+ */
+TagNav.navigatorController = SC.ObjectController.create( /** @scope TagNav.navigatorController.prototype */ {
 
-  Root controller for the application.
-
-  @extends SC.ArrayController
-*/
-TagNav.navigatorController = SC.ObjectController.create(
-/** @scope TagNav.navigatorController.prototype */ {
-
-  contentBinding: 'TagNav.allMediaController.arrangedObjects',
-
+  // The content of this controller is set the array of all the media records.
   allTags: [],
-  
+
   filterByTags: [],
   tagsInFilter: [],
 
@@ -26,96 +24,102 @@ TagNav.navigatorController = SC.ObjectController.create(
   /* This property hold string path to the current main content view */
   mainContentNowShowing: null,
 
-  init: function() {
-	sc_super();
-	
-	this._nvgtor_filterByTagsDidChanged();
-	this.get("filterByTags").addObserver('[]', this, this._nvgtor_filterByTagsDidChanged);
+  init: function () {
+    sc_super();
+
+    //this._nvgtor_filterByTagsDidChanged();
+    this.get("filterByTags").addObserver('[]', this, this._nvgtor_filterByTagsDidChanged);
   },
 
-  _tagnav_filterByTags_didReplace: function() {
-	
+  _tagnav_filterByTags_didReplace: function () {
+
   }.observes('filterByTags'),
 
-  _nvgtor_filterByTagsDidChanged: function() {
+  _nvgtor_filterByTagsDidChanged: function () {
+    console.log('_nvgtor_filterByTagsDidChanged');
     this._calcTagsInFilter();
   },
 
-  observeContent: function() {
+  observeContent: function () {
     var medias = this.get('content');
 
     var uniqTags = SC.Set.create();
-    medias.forEach(function(item) {
-	  var tags = item.get('tags');
-	  tags.forEach(function(tag) {
-		 uniqTags.push(tag);
-	  });
+    medias.forEach(function (item) {
+      var tags = item.get('tags');
+      tags.forEach(function (tag) {
+        uniqTags.push(tag);
+      });
     });
 
     // sort the unique tags
-    var sortTags = uniqTags.toArray().sort(function(x,y) { return SC.compare(x,y); });
+    var sortTags = uniqTags.toArray().sort(function (x, y) {
+      return SC.compare(x, y);
+    });
     this.set('allTags', sortTags);
 
+    console.log('calling _calcTagsInFilter');
     this._calcTagsInFilter();
   }.observes("content"),
 
-  _calcTagsInFilter: function() {
-	var self = this;
+  _calcTagsInFilter: function () {
+    var self = this;
     var medias = this.get('content');
-	var filterByTags = this.get('filterByTags');
-	var tagsInFilter = this.get('tagsInFilter');
-	var releventMedias = this.get('releventMedias');
-	
-	// clear all
-	//tagsInFilter.removeObjects(tagsInFilter);
-	releventMedias.removeObjects(releventMedias);
+    var filterByTags = this.get('filterByTags');
+    var tagsInFilter = this.get('tagsInFilter');
+    var releventMedias = this.get('releventMedias');
+
+    // clear all
+    //tagsInFilter.removeObjects(tagsInFilter);
+    releventMedias.removeObjects(releventMedias);
 
     var uniqTags = {};
-	var uniqMedia = SC.Set.create();
+    var uniqMedia = SC.Set.create();
 
-	if (filterByTags == null || filterByTags.length == 0) {
-		this.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.welcomeView');
-		if (medias != null) {
-		  medias.forEach(function(item) {
-		    self.addToTagHash(uniqTags, item.get('tags'), filterByTags);
- 	      });
+    if (filterByTags == null || filterByTags.length == 0) {
+      if (medias != null) {
+        medias.forEach(function (item) {
+          self.addToTagHash(uniqTags, item.get('tags'), filterByTags);
+        });
+        TagNav.sendAction('welcome', this);
+      }
+    }
+    else {
+      medias.forEach(function (item) {
+        var itemTags = item.get('tags');
+        var hasAllTags = filterByTags.every(function (v) {
+          for (var i = 0; i < itemTags.length; i++) {
+            if (SC.isEqual(itemTags[i], v)) return true;
+          }
+          return false;
+        });
+
+        if (hasAllTags) {
+          // Add the media to relevent media array.
+          uniqMedia.push(item);
+
+          // Add the tags of this item
+          self.addToTagHash(uniqTags, itemTags, filterByTags);
         }
- 	} else {
-	  this.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.mediaGrid');
-	  medias.forEach(function(item) {
-		var itemTags = item.get('tags');
-		var hasAllTags = filterByTags.every(function(v) {
-		  for (var i=0; i<itemTags.length;i++) {
-			if (SC.isEqual(itemTags[i], v)) return true;
-		  }
-		  return false;	
-		});
-		
-		if (hasAllTags) {
-			// Add the media to relevent media array.
-			uniqMedia.push(item);
-
-			// Add the tags of this item
-			self.addToTagHash(uniqTags, itemTags, filterByTags);
-		}
-	  });
+      });
+      TagNav.sendAction('tags', this, { tags: filterByTags.toString() });
+      //SC.routes.set('location', 'tags/%@'.fmt(filterByTags.toString()));
     }
 
-	// remove tags we already filter by.
-	this.set('tagsInFilter', uniqTags);
-	
-	var x = uniqMedia.toArray();
-	// TODO: sort
+    // remove tags we already filter by.
+    this.set('tagsInFilter', uniqTags);
+
+    var x = uniqMedia.toArray();
+    // TODO: sort
     this.set('releventMedias', x);
   },
 
-  addToTagHash: function(tagHash, itemTags, filterByTags) {
-	itemTags.forEach(function(tag) {
-	  if (filterByTags.indexOf(tag) == -1) {
-		  if (tagHash[tag] === undefined) tagHash[tag]=1;
-		  else tagHash[tag] += 1;
-	  }
-	});
+  addToTagHash: function (tagHash, itemTags, filterByTags) {
+    itemTags.forEach(function (tag) {
+      if (filterByTags.indexOf(tag) == -1) {
+        if (tagHash[tag] === undefined) tagHash[tag] = 1;
+        else tagHash[tag] += 1;
+      }
+    });
   }
 
-}) ;
+});

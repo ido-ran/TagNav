@@ -22,8 +22,10 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
     var content = this.get('content'); 
     if(SC.none(content)) return; 
 
-	var albumUser = content.get('user');
-	var albumID = content.get('album');
+    // Split the media ID which is build from user/album format.
+    var splitID = content.get('id').split('/');
+	var albumUser = splitID[0];
+	var albumID = splitID[1];
 	var albumInfo = TagNav.picasaAlbumMgr.getAlbum(albumUser, albumID, content.get('title'));
     this.albumInfo = albumInfo;
 

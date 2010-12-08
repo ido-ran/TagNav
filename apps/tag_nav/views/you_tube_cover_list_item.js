@@ -20,7 +20,7 @@ TagNav.YouTubeCoverListItemView = SC.View.extend(
     var content = this.get('content'); 
     if(SC.none(content)) return; 
 
-	var videoID = content.get('url');
+	var videoID = content.get('id');
 	var videoInfo = TagNav.youTubeVideoMgr.getVideo(videoID, content.get('title'));
 
     var photoView = this.createChildView( 

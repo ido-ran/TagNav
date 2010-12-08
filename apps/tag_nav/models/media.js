@@ -26,9 +26,11 @@ TagNav.Media = SC.Record.extend(
 
   title: SC.Record.attr(String),
   type: SC.Record.attr(String),
-  url: SC.Record.attr(String),
   tags: SC.Record.attr(Array),
 
+  /* Return the cover list item view
+     for specific media type 
+  */
   createCoverExampleView: function() {
 	var ev, type = this.get('type');
 	if (type == TagNav.MediaTypes.PICASAWEB) {
