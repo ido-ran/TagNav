@@ -30,12 +30,17 @@ TagNav.PicasaAlbum = SC.Object.extend(
   All the photos in the album */
   photos: null,
 
+  /* @public PicasaPhoto[]
+  All thumbnail (preview) photos */
+  thumbnailPhotos: null,
+
   activeThumbnailIndex: -1,
   activeThumbnailUrl: null,
 
   init: function() {
     sc_super();
     this.photos = [];
+    this.thumbnailPhotos = [];
   },
 
    __tagnav_activeThumbnailIndexDidChanged: function() {
@@ -43,7 +48,7 @@ TagNav.PicasaAlbum = SC.Object.extend(
 	if (activeThumbnailIndex == -1) {
 	  this.set('activeThumbnailUrl', this.get('thumbnailUrl'));
 	} else {
-		var photo = this.get('photos').objectAt(activeThumbnailIndex);
+		var photo = this.get('thumbnailPhotos').objectAt(activeThumbnailIndex);
 		if (photo != null) {
 			var photoThumbnail = photo.get('smallThumbnailUrl');
 			this.set('activeThumbnailUrl', photoThumbnail);

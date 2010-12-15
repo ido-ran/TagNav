@@ -88,21 +88,21 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
   mouseExited: function(evt) {
 	var albumInfo = this.albumInfo;
 	if (albumInfo == null) return;
-	if (albumInfo.photos == null) return;
+	if (albumInfo.thumbnailPhotos == null) return;
 	albumInfo.set('activeThumbnailIndex', (-1));
   },
 
   mouseMoved: function(evt) {
 	var albumInfo = this.albumInfo;
 	if (albumInfo == null) return;
-	if (albumInfo.photos == null) return;
+	if (albumInfo.thumbnailPhotos == null) return;
 
 	var l = this.get('layer');
 	if (l == null) return;
 	var left = l.offsetLeft;
 	var width = l.offsetWidth;
 	var mouseX = evt.clientX;
-	var photoCount = albumInfo.photos.length;
+	var photoCount = albumInfo.thumbnailPhotos.length;
 	
 	var photoSliceWidth = width / photoCount;
 	var photoIndex = ((mouseX - left) / photoSliceWidth);

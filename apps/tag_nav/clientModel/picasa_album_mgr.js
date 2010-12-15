@@ -44,14 +44,18 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 				// Extract entries
 				album.set('numphotos', data.feed.gphoto$numphotos);
 				
-				data.feed.entry.forEach(function(e, i) {
+				data.feed.entry.forEach(function(e, i) {			
 				  var photo = TagNav.PicasaPhoto.create();
 				  photo.set('title', e.title.$t);
 				  photo.set('content', e.content.src);
 				  album.photos.pushObject(photo);
 				
-				  // Start caching the image
-				  SC.imageCache.loadImage(photo.get('smallThumbnailUrl'));
+				  // Limit the thumbnails to be the first 10 photos
+				  if (album.thumbnailPhotos.length < 10) {
+				    // Start caching the image
+				    album.thumbnailPhotos.pushObject(photo);
+				    SC.imageCache.loadImage(photo.get('smallThumbnailUrl'));
+			      }
 				});
 				
 				// Extract slide show link
