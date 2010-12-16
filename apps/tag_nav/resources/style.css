@@ -43,6 +43,27 @@
 	color: white;
 }
 
+.tagcloud-view li.tag-1
+{
+	color: white;
+}
+.tagcloud-view li.tag-2
+{
+	color: gray;
+}
+.tagcloud-view li.tag-3
+{
+	color: #FF8040;
+}
+.tagcloud-view li.tag-4
+{
+	color: #804000;
+}
+.tagcloud-view li.tag-5
+{
+	color: #808000;
+}
+
 .tagcloud-view li:hover {
 	background: white;
 	color: black;
