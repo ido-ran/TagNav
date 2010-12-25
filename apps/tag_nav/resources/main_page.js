@@ -46,16 +46,10 @@ TagNav.mainPage = SC.Page.design({
 	}),
 	
 	welcomeView: SC.View.design({
-	  childViews: 'welcomeMessage whatIsTags'.w(),
+	  childViews: 'albumStrip1'.w(),
 	  
-	  welcomeMessage: SC.LabelView.design({
-	    layout: { top: 10, height: 40 },
-	    value: "_welcome".loc()
-      }),
-
-	  whatIsTags: SC.LabelView.design({
-	    layout: { top: 50, height: 40 },
-	    value: "this is tags"	
+	  albumStrip1: TagNav.AlbumStripView.design({
+	    layout: { left: 0, top: 0, right: 0, height: 200 }
       })
 	}),
 
