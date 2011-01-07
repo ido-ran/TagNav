@@ -4,7 +4,8 @@ TagNav.routes = SC.Object.create({
     SC.routes.add('tags/:tags', TagNav.routes, 'tagsRoute');
     SC.routes.add('picasa/:userID/:albumID', TagNav.routes, 'picasaRoute');
     SC.routes.add('youtube/:videoID', TagNav.routes, 'youtubeRoute');
-    SC.routes.add('welcome', TagNav.routes, 'welcomeRoute')
+    SC.routes.add('welcome', TagNav.routes, 'welcomeRoute');
+    SC.routes.add('admin', TagNav.routes, 'adminRoute');
   },
 
   /**
@@ -38,5 +39,10 @@ TagNav.routes = SC.Object.create({
   welcomeRoute: function (route) {
 	console.log('activate welcomeRoute');
     TagNav.sendAction('welcome', this);
+  },
+
+  adminRoute: function (route) {
+	console.log('activate adminRoute');
+    TagNav.sendAction('admin', this);
   }
 });

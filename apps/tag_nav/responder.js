@@ -6,6 +6,9 @@ TagNav.states.root = SC.Responder.create({
 	name: 'root',
    _activeMediaView: null,
 
+   /* Indication if an admin has been authenticated */
+   _isAdminAuth: NO,
+
    removeActiveMdiaView: function() {
 //	console.log('root::removeActiveMdiaView');
 	if (this._activeMediaView != null) {
@@ -81,6 +84,27 @@ TagNav.states.root = SC.Responder.create({
 	TagNav.youTubeVideoController.set('content', videoInfo);
 	var view = TagNav.getPath('youtubeVideoPage.mainPane');
 	this.navigateTo(view);
+  },
+
+  admin: function(sender, args) {
+    if (this._isAdminAuth === NO) {
+	  this.adminLogin(sender, args);
+    } else {
+      TagNav.makeFirstResponder(TagNav.states.admin);
+      var view = TagNav.getPath('adminMediaPage.mainPane');
+      this.navigateTo(view);
+    }
+  },
+
+  adminLogin: function(sender, args) {
+    TagNav.makeFirstResponder(TagNav.states.adminLogin);
+    var view = TagNav.getPath('adminLoginPage.mainPane');
+    this.navigateTo(view);
+  },
+
+  adminAuthenticated: function(sender, args) {
+    this._isAdminAuth = YES;
+    this.admin(sender, args);	
   }
 
 });
@@ -160,4 +184,14 @@ TagNav.states.youTubeVideo = TagNav.mediaResponder.create({
 	  //console.log('picasaAlbum::goBack');
 	  return this._resetBackUrl();
 	}
+});
+
+TagNav.states.admin = TagNav.mediaResponder.create({
+	name: 'admin',
+	nextResponder: TagNav.states.root
+});
+
+TagNav.states.adminLogin = TagNav.mediaResponder.create({
+	name: 'adminLogin',
+	nextResponder: TagNav.states.root
 });
