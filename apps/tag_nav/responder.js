@@ -92,6 +92,7 @@ TagNav.states.root = SC.Responder.create({
     } else {
       TagNav.makeFirstResponder(TagNav.states.admin);
       var view = TagNav.getPath('adminMediaPage.mainPane');
+      TagNav.adminMediaArrayController.initialize();
       this.navigateTo(view);
     }
   },

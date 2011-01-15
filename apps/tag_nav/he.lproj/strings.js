@@ -10,5 +10,6 @@
 // localized string added to this file!
 //
 SC.stringsFor('he', {
-  "_welcome": "ברוכים הבאים לפוטובוק"
+  "_welcome": "ברוכים הבאים לפוטובוק",
+  "_save": "שמור"
 }) ;

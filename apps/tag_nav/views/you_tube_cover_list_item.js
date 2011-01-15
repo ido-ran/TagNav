@@ -10,10 +10,19 @@
 
   @extends SC.View
 */
-TagNav.YouTubeCoverListItemView = SC.View.extend(
+TagNav.YouTubeCoverListItemView = SC.View.extend(SC.ContentDisplay,
 /** @scope TagNav.MediaListItemView.prototype */ {
 
+  displayProperties: 'isSelected'.w(),
+  
   classNames: ['youtube-album-cover'],
+
+  render: function(context, firstTime) {
+	var isSelected = this.get('isSelected');
+	context.setClass('selected', isSelected);
+	
+	sc_super();
+  },
 
   createChildViews: function(){ 
     var childViews = []; 

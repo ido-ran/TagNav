@@ -55,6 +55,7 @@ TagNav.adminLoginPage = SC.Page.design({
       loginButton: SC.ButtonView.design({
 	    layout: { bottom: 10, left: 10, width: 100, height: 26 },
 	    title: 'login',
+	    isDefault: YES,
 	    action: 'authenticate',
 	    target: TagNav.adminLoginController
       })

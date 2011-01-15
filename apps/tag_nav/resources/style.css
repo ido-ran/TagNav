@@ -21,6 +21,11 @@
 	overflow: hidden;
 }
 
+.selected .sc-view.media-title {
+	color: white;
+	background: rgba(0,0,255, 0.6);
+}
+
 .sc-label-view.sc-regular-size.page-title {
     font-size: 22px;
     line-height: 19px;
@@ -30,7 +35,7 @@
 	/*border: 1px solid #3274D0;*/
 }
 
-.youtube-album-cover {
+.sc-view .youtube-album-cover {
 	/*border: 1px solid red;*/
 }
 

@@ -10,5 +10,14 @@
 // localized string added to this file!
 //
 SC.stringsFor('English', {
-  "_welcome": "Welcome to PhotoBook"
+  "_welcome": "Welcome to PhotoBook",
+  "_save": "Save",
+  "_addNewMedia": "Add New",
+  "_deleteMedia": "Delete",
+  "_ok": "OK",
+  "_cancel": "Cancel",
+
+
+  // Admin Media Page
+  "_addMediaExplanation": "Please paste here the url of the media you want to add"
 }) ;

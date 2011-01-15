@@ -10,12 +10,21 @@
 
   @extends SC.View
 */
-TagNav.PicasaAlbumCoverListItemView = SC.View.extend(
+TagNav.PicasaAlbumCoverListItemView = SC.View.extend(SC.ContentDisplay,
 /** @scope TagNav.MediaListItemView.prototype */ {
+
+  displayProperties: 'isSelected'.w(),
 
   classNames: ['picasa-album-cover'],
 
   albumInfo: null,
+
+  render: function(context, firstTime) {
+	var isSelected = this.get('isSelected');
+	context.setClass('selected', isSelected);
+	
+	sc_super();
+  },
 
   createChildViews: function(){ 
     var childViews = []; 
