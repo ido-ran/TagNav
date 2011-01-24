@@ -6,7 +6,8 @@
 
 /** @class
 
-  (Document Your Controller Here)
+  This array controller hold the entier media collection.
+  It act as a root controller for this application.
 
   @extends SC.Object
 */

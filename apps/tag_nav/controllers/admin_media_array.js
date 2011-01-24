@@ -13,6 +13,8 @@
 TagNav.adminMediaArrayController = SC.ArrayController.create(
 /** @scope TagNav.adminMediaArrayController.prototype */ {
 
+  allowsMultipleSelection: NO,
+
   _isInit: NO,
 
   initialize: function() {

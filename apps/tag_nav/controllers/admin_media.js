@@ -54,6 +54,13 @@ TagNav.adminMediaController = SC.ObjectController.create(
 	newDialog.remove();	
   },
 
+  deleteMedia: function() {
+	var media = this.get('content');
+	TagNav.adminMediaArrayController.selectObject(null);
+	media.destroy();
+	media.commitRecord();
+  },
+
   YOUTUBE_URL: "youtube.com/watch?v",
   PICASA_URL: "picasaweb.google.com/",
 
@@ -74,16 +81,17 @@ TagNav.adminMediaController = SC.ObjectController.create(
 	}
 	console.log("after testing");
 	if (type !== undefined && id !== undefined) {
-		/*media = TagNav.store.createRecord(TagNav.Media,
+		media = TagNav.store.createRecord(TagNav.Media,
 			{ 
-				"id": id,
+				"_id": id,
 				"type": type,
-				"tags" []
+				"tags": []
 			}
 		);
-		media.commitRecord();*/
-		alert("adding %@ with id %@".fmt(type, id));
-		media = YES;
+		media.commitRecord();
+		
+		// Select the new media in the admin media grid.
+		TagNav.adminMediaArrayController.selectObject(media);
 	}
 	
 	return (media !== undefined);
@@ -93,7 +101,7 @@ TagNav.adminMediaController = SC.ObjectController.create(
 	this.set('hasMediaToEdit', NO);
 
 	var media = this.get('content');
-	if (!(media && media.isRecord)) {
+	if (!media || !media.isRecord) {
 		this.set('editableTags', null);
 	} else {
 		this.set('editableTags', media.get('tags').toString());
@@ -102,8 +110,11 @@ TagNav.adminMediaController = SC.ObjectController.create(
   }.observes('*content'),
 
   _editableTagsDidChanged: function() {
-	if (this.get('hasMediaToEdit')) {
-		var currTags = this.get('content').get('tags').toString();
+	var hasMediaToEdit = this.get('hasMediaToEdit');
+	var media = this.get('content');
+	
+	if (media) {
+		var currTags = media.get('tags').toString();
 		var editableTags = this.get('editableTags');
 		var hasChanged = (currTags != editableTags);
 		

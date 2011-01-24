@@ -19,13 +19,13 @@ TagNav.navigatorController = TagNav.ItemsByTagController.create(
   // filterByTags: array of the tags the controller is filtered by.
   filterTagsDidChanged: function(filterByTags) {
 	sc_super(filterByTags);
-    TagNav.sendAction('tags', this, { tags: filterByTags.toString() });
+    TagNav.sendAction('tagsChanged', this, { tags: filterByTags.toString() });
   },
 
   // Called when the filter tags are cleared
   filterTagsDidClear: function() {
 	sc_super();
-	TagNav.sendAction('welcome', this);
+	TagNav.sendAction('tagsClear', this);
   }
 
 });

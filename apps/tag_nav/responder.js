@@ -29,33 +29,10 @@ TagNav.states.root = SC.Responder.create({
     view.append();
   },
 
-  welcome: function() {
-//	console.log('receive welcome action');
-	SC.routes.set('location', 'welcome');
-	this.removeActiveMdiaView();
-	TagNav.makeFirstResponder(TagNav.states.welcome);
+  tagsClear: function() {
   },
 
-  tags: function(sender, args) {
-	if (TagNav.get('firstResponder') !== TagNav.states.mediaGrid) {
-		this.removeActiveMdiaView();
-		TagNav.makeFirstResponder(TagNav.states.mediaGrid);
-	}
-	
-	var tags = args.tags;
-	var navTags = TagNav.navigatorController.get('filterByTags');
-	if (tags != navTags.toString()) {
-		// Clear the current tags
-		while (navTags.length > 0) navTags.popObject();
-		
-		// Add argument tags
-		var tagArray = tags.split(',');
-		for (var i = 0; i < tagArray.length; i++) {
-          navTags.pushObject(tagArray[i]);
-        }
-	}
-
-     SC.routes.set('location', 'tags/%@'.fmt(tags));
+  tagsChanged: function(sender, args) {
   },
 
   picasa: function(sender, args) {
@@ -118,7 +95,8 @@ TagNav.states.initializing = SC.Responder.create({
 	name: 'initializing',
 	nextResponder: TagNav.states.root,
 	
-   tags: function() {
+
+   tagsChanged: function() {
      return YES;
    },
 
@@ -130,8 +108,25 @@ TagNav.states.initializing = SC.Responder.create({
      return YES;
    },
 
-   welcome: function() {
+   tagsClear: function() {
      return YES;
+   }
+
+});
+
+/**
+Loaded state is used when the application has been initialized
+and before the first view is presented.
+*/
+TagNav.states.loaded = SC.Responder.create({
+	name: 'loaded',
+	nextResponder: TagNav.states.root,
+
+   tagsClear: function(sender, args) {
+	//	console.log('receive welcome action');
+		SC.routes.set('location', 'welcome');
+		TagNav.states.root.removeActiveMdiaView();
+		TagNav.makeFirstResponder(TagNav.states.welcome);
    }
 });
 
@@ -141,7 +136,30 @@ TagNav.states.welcome = SC.Responder.create({
 	
 	didBecomeFirstResponder: function() {
 	  TagNav.navigatorController.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.welcomeView');
+	},
+	
+   tagsChanged: function(sender, args) {
+	if (TagNav.get('firstResponder') !== TagNav.states.mediaGrid) {
+		TagNav.states.root.removeActiveMdiaView();
+		TagNav.makeFirstResponder(TagNav.states.mediaGrid);
 	}
+
+	var tags = args.tags;
+	var navTags = TagNav.navigatorController.get('filterByTags');
+	if (tags != navTags.toString()) {
+		// Clear the current tags
+		while (navTags.length > 0) navTags.popObject();
+
+		// Add argument tags
+		var tagArray = tags.split(',');
+		for (var i = 0; i < tagArray.length; i++) {
+          navTags.pushObject(tagArray[i]);
+        }
+	}
+
+     SC.routes.set('location', 'tags/%@'.fmt(tags));
+   }
+
 });
 
 TagNav.states.mediaGrid = SC.Responder.create({

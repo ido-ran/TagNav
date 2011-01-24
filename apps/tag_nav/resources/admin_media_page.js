@@ -105,7 +105,10 @@ TagNav.adminMediaPage = SC.Page.design({
 			
 			deleteButton: SC.ButtonView.design({
 				layout: { top: 140, left: 5, width: 90, height: 26 },
-				title: "_deleteMedia".loc()
+				title: "_deleteMedia".loc(),
+				action: 'deleteMedia',
+				target: 'TagNav.adminMediaController',
+				i1sEnabledBinding: 'TagNav.adminMediaController.hasMediaToEdit'
 			})
 		})
 	})

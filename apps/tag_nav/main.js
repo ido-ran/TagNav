@@ -33,8 +33,8 @@ TagNav.main = function main() {
   // TODO: Set the content property on your primary controller
   // ex: TagNav.contactsController.set('content',TagNav.contacts);
   TagNav.invokeLast(function() { 
-	TagNav.homeStripController.set('filterByTags', ['עמק', '2002']);
-	TagNav.makeFirstResponder(TagNav.states.root);
+	TagNav.homeStripController.set('filterByTags', ['2002']);
+	TagNav.makeFirstResponder(TagNav.states.loaded);
 	TagNav.routes.initializeDidComplete();
   });
 

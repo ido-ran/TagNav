@@ -69,7 +69,7 @@ TagNav.CouchDbDataSource = SC.DataSource.extend(
     throw "not support single record";
 
 	if (SC.kindOf(store.recordTypeFor(storeKey), Todos.Task)) {
-		var id = store.idFor(storeKey);
+		var id = encodeURIComponent(store.idFor(storeKey));
 		SC.Request.getUrl(this.getServerPath(id))
 		          .header('Accept', 'application/json').json()
 		      .notify(this, 'didRetrieveTask', store, storeKey)
@@ -148,7 +148,7 @@ TagNav.CouchDbDataSource = SC.DataSource.extend(
   updateRecord: function(store, storeKey) {
 
   if (SC.kindOf(store.recordTypeFor(storeKey), TagNav.Media)) {
-	var id = store.idFor(storeKey);
+	var id = encodeURIComponent(store.idFor(storeKey));
     var dataHash = store.readDataHash(storeKey);
     SC.Request.putUrl(this.getServerPath(id)).json()
               .header('Accept', 'application/json')
@@ -174,7 +174,7 @@ TagNav.CouchDbDataSource = SC.DataSource.extend(
   destroyRecord: function(store, storeKey) {
 
     if (SC.kindOf(store.recordTypeFor(storeKey), TagNav.Media)) {
-	  var id = store.idFor(storeKey);
+	  var id = encodeURIComponent(store.idFor(storeKey));
 	  //var rev = this._docsRev[id];	
 	  var dataHash = store.readDataHash(storeKey);
 	  var rev = this.getDocRev(dataHash);
