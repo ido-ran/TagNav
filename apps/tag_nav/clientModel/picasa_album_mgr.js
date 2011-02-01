@@ -31,6 +31,8 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 		dataType: 'jsonp',
 		success: function(data) {
 			SC.run(function() {
+				try {
+				
 				// Extract the album cover
 				var icon = data.feed.icon.$t.replace(new RegExp("/s160-c/", "g"), "/");
 				icon = icon + '?imgmax=200&crop=1';
@@ -65,6 +67,10 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 					album.set('slideshowUrl', link.href);
 				  }	
 				});
+		        }
+		        catch (err) {
+			      console.log('Error in %@ - %@'.fmt(albumID, err.description));
+		        }
 			});
 	    }
 	});

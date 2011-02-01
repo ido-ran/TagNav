@@ -56,9 +56,21 @@ TagNav.adminMediaController = SC.ObjectController.create(
 
   deleteMedia: function() {
 	var media = this.get('content');
-	TagNav.adminMediaArrayController.selectObject(null);
-	media.destroy();
-	media.commitRecord();
+
+	SC.AlertPane.warn(
+		"_deleteMediaTitle".loc(), 
+		"_deleteMediaMessage".loc(), null,
+		"_yes".loc(), "_no".loc(),
+		{
+		  alertPaneDidDismiss: function(pane, status) {
+			if (status === SC.BUTTON1_STATUS) {
+		      TagNav.adminMediaArrayController.selectObject(null);
+			  media.destroy();
+			  media.commitRecord();
+		    }
+          }
+		}
+	);
   },
 
   YOUTUBE_URL: "youtube.com/watch?v",

@@ -60,42 +60,58 @@ TagNav.adminMediaPage = SC.Page.design({
 		editorView: SC.View.design({
 			layout: { right: 0, width: 300, top: 0, bottom: 0 },
 			backgroundColor: 'green',
-			childViews: 'newButton typeLabel typeText  tagsLabel tagsText  saveButton deleteButton'.w(),
+			childViews: 'newPanel labelEditInfo typeLabel typeText  tagsLabel tagsText  saveButton deleteButton totalMediaLabel totalMediaCount'.w(),
 			
-			newButton: SC.ButtonView.design({
-			  layout: { top: 20, right: 20, left: 20, height: 36 },
-			  title: "_addNewMedia".loc(),
-              target: 'TagNav.adminMediaController',
-              action: 'showAddNewDialog'
+			newPanel: SC.View.design({
+				layout: { height: 200 },
+				childViews: 'info newButton'.w(),
+				
+				info: SC.LabelView.design({
+					layout: { height: 70, left: 10, right: 10 },
+					value: '_addNewExplanation'.loc()
+				}),
+				
+				newButton: SC.ButtonView.design({
+				  layout: { top: 80, right: 20, left: 20, height: 36 },
+				  title: "_addNewMedia".loc(),
+	              target: 'TagNav.adminMediaController',
+	              action: 'showAddNewDialog'
+				})
 			}),
 			
+			labelEditInfo: SC.LabelView.design({
+				layout: { top: 120, height: 70, left: 10, right: 10 },
+				value: "_editLabelExplanation".loc()
+			}),
+						
 			typeLabel: SC.LabelView.design({
-				layout: { top: 60, right: 0, width: 50, height: 18 },
+				layout: { top: 200, right: 0, width: 50, height: 18 },
 				textAlign: SC.ALIGN_LEFT,
-				value: 'סוג'
+				value: '_id'.loc()
 			}),
 			
 			typeText: SC.TextFieldView.design({
-				layout: { top: 60, left: 5, height: 20, width: 240 },
+				layout: { top: 200, left: 5, height: 20, width: 240 },
 				valueBinding: 'TagNav.adminMediaController._id',
-				isEditable: NO
+				isEnabled: NO,
+				hit: 'Select media in the grid'
 			}),
 			
 			tagsLabel: SC.LabelView.design({
-				layout: { top: 90, right: 0, width: 50, height: 18 },
+				layout: { top: 230, right: 0, width: 50, height: 18 },
 				textAlign: SC.ALIGN_LEFT,
-				value: 'תוויות'
+				value: '_labels'.loc()
 			}),
 			
 			tagsText: SC.TextFieldView.design({
-				layout: { top: 90, left: 5, height: 40, width: 240 },
+				layout: { top: 230, left: 5, height: 40, width: 240 },
 				valueBinding: 'TagNav.adminMediaController.editableTags',
 				isTextArea: YES,
 				isEnabledBinding: 'TagNav.adminMediaController.hasMediaToEdit'
 			}),
 			
 			saveButton: SC.ButtonView.design({
-				layout: { top: 140, right: 5, width: 90, height: 26 },
+				layout: { top: 300, right: 5, width: 90, height: 26 },
 				title: "_save".loc(),
 				isDefault: YES,
 				target: 'TagNav.adminMediaController',
@@ -104,11 +120,21 @@ TagNav.adminMediaPage = SC.Page.design({
 			}),
 			
 			deleteButton: SC.ButtonView.design({
-				layout: { top: 140, left: 5, width: 90, height: 26 },
+				layout: { top: 300, left: 5, width: 90, height: 26 },
 				title: "_deleteMedia".loc(),
 				action: 'deleteMedia',
 				target: 'TagNav.adminMediaController',
 				i1sEnabledBinding: 'TagNav.adminMediaController.hasMediaToEdit'
+			}),
+			
+			totalMediaLabel: SC.LabelView.design({
+				layout: { top: 340, left: 10, width: 150 },
+				value: '_totalMediaTitle'.loc()
+			}),
+			
+			totalMediaCount: SC.LabelView.design({
+				layout: { top: 340, left: 160, width: 100 },
+				valueBinding: 'TagNav.adminMediaArrayController.length'
 			})
 		})
 	})
