@@ -23,6 +23,7 @@ TagNav.releventMediaController = SC.ArrayController.create(
   // Sent from the medias grid
   mediaSelected: function() {
 	var selMedia = this.get('selectedMedia');
+	if (selMedia === null) return;
 
 	if (selMedia.get('type') == TagNav.MediaTypes.PICASAWEB) {
 	  // showing picasaweb album

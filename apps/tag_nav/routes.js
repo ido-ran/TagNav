@@ -15,17 +15,22 @@ TagNav.routes = SC.Object.create({
     // If we have hash part we navigate to it,
     // otherwise we start from the top.
     var l = SC.routes.get('location');
-    //console.log(['init_route', l]);
+    console.log(['init_route', l, 'isEmpty', SC.empty(l)]);
     if (SC.empty(l)) {
 	  TagNav.sendAction('welcome', this);
-    } else {    
+    } else {
       SC.routes.trigger();
     }
   },
 
   tagsRoute: function (route) {
 	console.log(['tagsRoute', route]);
-    TagNav.sendAction('tags', this, { tags: route.tags });
+	var tags = route.tags;
+	if (SC.empty(tags) || tags == "") {
+	  TagNav.sendAction('tagsClear', this);
+	} else {
+      TagNav.sendAction('tagsChanged', this, { tags: route.tags });
+    }
   },
 
   picasaRoute: function (route) {
@@ -37,12 +42,12 @@ TagNav.routes = SC.Object.create({
   },
 
   welcomeRoute: function (route) {
-	console.log('activate welcomeRoute');
+	//console.log('activate welcomeRoute');
     TagNav.sendAction('welcome', this);
   },
 
   adminRoute: function (route) {
-	console.log('activate adminRoute');
+	//console.log('activate adminRoute');
     TagNav.sendAction('admin', this);
   }
 });

@@ -44,6 +44,7 @@ TagNav.AlbumStripView = SC.View.extend(
 		  layout: { height: 200 },
 		  backgroundColor: 'black',
 		  contentBinding: 'TagNav.homeStripController.releventMedias',
+		  selectionBinding: 'TagNav.releventMediaController.selection',
 		  contentValueKey: 'title',
 		  columnWidth: 200,
 		  rowHeight: 200,

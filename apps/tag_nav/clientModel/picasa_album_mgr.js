@@ -23,6 +23,8 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 	
 	album = TagNav.PicasaAlbum.create();
 	album.set('title', tempTitle);
+
+    albums[key] = album;
 	
 	// Start async get
 	var albumUrl = 'http://picasaweb.google.com/data/feed/api/user/%@/album/%@'.fmt(user, albumID);
@@ -70,12 +72,12 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 		        }
 		        catch (err) {
 			      console.log('Error in %@ - %@'.fmt(albumID, err.description));
+				  album.set('title', 'ERROR');
 		        }
 			});
 	    }
 	});
 	
-    albums[key] = album;
     return album;
   }
 }) ;

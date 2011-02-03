@@ -48,7 +48,7 @@ TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navi
   }.observes('filterByTags'),
 
   _nvgtor_filterByTagsDidChanged: function () {
-    console.log('_nvgtor_filterByTagsDidChanged');
+    //console.log('_nvgtor_filterByTagsDidChanged');
     this._calcTagsInFilter();
   },
 
@@ -69,7 +69,7 @@ TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navi
     });
     this.set('allTags', sortTags);
 
-    console.log('calling _calcTagsInFilter');
+    //console.log('calling _calcTagsInFilter');
     this._calcTagsInFilter();
   }.observes("content"),
 
@@ -79,7 +79,7 @@ TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navi
     var filterByTags = this.get('filterByTags');
     var tagsInFilter = this.get('tagsInFilter');
     var releventMedias = this.get('releventMedias');
-	console.log(['foreachMedia', this]);
+	//console.log(['foreachMedia', this]);
     // clear all
     //tagsInFilter.removeObjects(tagsInFilter);
     releventMedias.removeObjects(releventMedias);

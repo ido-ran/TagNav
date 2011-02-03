@@ -9,6 +9,14 @@ TagNav.states.root = SC.Responder.create({
    /* Indication if an admin has been authenticated */
    _isAdminAuth: NO,
 
+	didBecomeFirstResponder: function() {
+     console.log('root::didBecomeFirstResponder');
+   },
+
+   willLoseFirstResponder: function(responder) {
+     console.log('root::willLoseFirstResponder');	
+   },
+
    removeActiveMdiaView: function() {
 //	console.log('root::removeActiveMdiaView');
 	if (this._activeMediaView != null) {
@@ -18,8 +26,14 @@ TagNav.states.root = SC.Responder.create({
    },
 
   goBack: function() {
-//	console.log('root::goBack');
+	//console.log(['root::goBack', this._activeMediaView, 'responder', TagNav.get('firstResponder')]);
+	
 	this.removeActiveMdiaView();
+	if (TagNav.navigatorController.filterByTags.length > 0) {
+	  SC.routes.set('location', 'tags/%@'.fmt(TagNav.navigatorController.filterByTags.toString()));
+	} else {
+	  TagNav.makeFirstResponder(TagNav.states.welcome);
+	}
   },
 
   navigateTo: function(view) {
@@ -30,9 +44,34 @@ TagNav.states.root = SC.Responder.create({
   },
 
   tagsClear: function() {
+	TagNav.makeFirstResponder(TagNav.states.welcome);
   },
 
   tagsChanged: function(sender, args) {
+	if (TagNav.get('firstResponder') !== TagNav.states.mediaGrid) {
+		TagNav.states.root.removeActiveMdiaView();
+		TagNav.makeFirstResponder(TagNav.states.mediaGrid);
+	}
+
+	var tags = args.tags;
+	var navTags = TagNav.navigatorController.get('filterByTags');
+	
+	// If the tags in the arguments is different from the tags in the controller
+	// it means we are responding to route of tags. So we reset the tags in the controller
+	// to reflect the request from the route in the display.
+	if (tags != navTags.toString()) {
+		// Clear the current tags
+		while (navTags.length > 0) navTags.popObject();
+
+		// Add argument tags
+		var tagArray = tags.split(',');
+		for (var i = 0; i < tagArray.length; i++) {
+         navTags.pushObject(tagArray[i]);
+       }
+	}
+
+    // We update the route to reflect the currently filter tags.
+    SC.routes.set('location', 'tags/%@'.fmt(tags));
   },
 
   picasa: function(sender, args) {
@@ -94,6 +133,14 @@ and before the first view is presented.
 TagNav.states.initializing = SC.Responder.create({
 	name: 'initializing',
 	nextResponder: TagNav.states.root,
+
+	didBecomeFirstResponder: function() {
+      console.log('initializing::didBecomeFirstResponder');
+    },
+
+    willLoseFirstResponder: function(responder) {
+      console.log('initializing::willLoseFirstResponder');	
+    },
 	
 
    tagsChanged: function() {
@@ -122,12 +169,19 @@ TagNav.states.loaded = SC.Responder.create({
 	name: 'loaded',
 	nextResponder: TagNav.states.root,
 
+	didBecomeFirstResponder: function() {
+      console.log('loaded::didBecomeFirstResponder');
+    },
+
+    willLoseFirstResponder: function(responder) {
+      console.log('loaded::willLoseFirstResponder');	
+    }/*,
+
    tagsClear: function(sender, args) {
 	//	console.log('receive welcome action');
-		SC.routes.set('location', 'welcome');
 		TagNav.states.root.removeActiveMdiaView();
 		TagNav.makeFirstResponder(TagNav.states.welcome);
-   }
+   }*/
 });
 
 TagNav.states.welcome = SC.Responder.create({
@@ -135,30 +189,14 @@ TagNav.states.welcome = SC.Responder.create({
 	nextResponder: TagNav.states.root,
 	
 	didBecomeFirstResponder: function() {
+      console.log('welcome::didBecomeFirstResponder');
+	  SC.routes.set('location', 'welcome');
 	  TagNav.navigatorController.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.welcomeView');
 	},
-	
-   tagsChanged: function(sender, args) {
-	if (TagNav.get('firstResponder') !== TagNav.states.mediaGrid) {
-		TagNav.states.root.removeActiveMdiaView();
-		TagNav.makeFirstResponder(TagNav.states.mediaGrid);
-	}
 
-	var tags = args.tags;
-	var navTags = TagNav.navigatorController.get('filterByTags');
-	if (tags != navTags.toString()) {
-		// Clear the current tags
-		while (navTags.length > 0) navTags.popObject();
-
-		// Add argument tags
-		var tagArray = tags.split(',');
-		for (var i = 0; i < tagArray.length; i++) {
-          navTags.pushObject(tagArray[i]);
-        }
-	}
-
-     SC.routes.set('location', 'tags/%@'.fmt(tags));
-   }
+    willLoseFirstResponder: function(responder) {
+      console.log('welcome::willLoseFirstResponder');	
+    }
 
 });
 
@@ -167,20 +205,34 @@ TagNav.states.mediaGrid = SC.Responder.create({
 	nextResponder: TagNav.states.root,
 
 	didBecomeFirstResponder: function() {
+      console.log('mediaGrid::didBecomeFirstResponder');
 	  TagNav.navigatorController.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.mediaGrid');
-	}
+	},
+	
+    willLoseFirstResponder: function(responder) {
+      console.log('mediaGrid::willLoseFirstResponder');	
+    }
+	
 });
 
 TagNav.mediaResponder = SC.Responder.extend({
 	// private methods
 
   _resetBackUrl: function() {
+	TagNav.state.root.removeActiveMdiaView();
 	if (TagNav.navigatorController.filterByTags.length > 0) {
 	  SC.routes.set('location', 'tags/%@'.fmt(TagNav.navigatorController.filterByTags.toString()));
-	  return YES;
 	} else {
-	  return NO;
-	}	
+	  TagNav.makeFirstResponder(TagNav.states.welcome);
+	}
+  },
+
+  tagsClear: function() {
+	// Ignore tags changes when inside a media resppnder.
+  },
+
+  tagsChanged: function(sender, args) {
+	// Ignore tags changes when inside a media resppnder.
   }
   
 });
@@ -188,21 +240,37 @@ TagNav.mediaResponder = SC.Responder.extend({
 TagNav.states.picasaAlbum = TagNav.mediaResponder.create({
 	name: 'picasaAlbum',
 	nextResponder: TagNav.states.root,
+
+	didBecomeFirstResponder: function() {
+      console.log('picasaAlbum::didBecomeFirstResponder');
+    },
+
+    willLoseFirstResponder: function(responder) {
+      console.log('picasaAlbum::willLoseFirstResponder');	
+    }
 	
-	goBack: function() {
+//	goBack: function() {
 	  //console.log('picasaAlbum::goBack');
-	  return this._resetBackUrl();
-	}
+//	  return this._resetBackUrl();
+//	}
 });
 
 TagNav.states.youTubeVideo = TagNav.mediaResponder.create({
 	name: 'youTubeVideo',
 	nextResponder: TagNav.states.root,
+
+	didBecomeFirstResponder: function() {
+      console.log('youTubeVideo::didBecomeFirstResponder');
+    },
+
+    willLoseFirstResponder: function(responder) {
+      console.log('youTubeVideo::willLoseFirstResponder');	
+    }
 	
-	goBack: function() {
+//	goBack: function() {
 	  //console.log('picasaAlbum::goBack');
-	  return this._resetBackUrl();
-	}
+//	  return this._resetBackUrl();
+//	}
 });
 
 TagNav.states.admin = TagNav.mediaResponder.create({

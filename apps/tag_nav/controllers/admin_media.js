@@ -79,7 +79,6 @@ TagNav.adminMediaController = SC.ObjectController.create(
   _tryAddNewMedia: function(mediaUrl) {
 	var i, type, id, media;
 	
-	console.log("before tes youtube");
 	if (-1 < (i = mediaUrl.indexOf(this.YOUTUBE_URL))) {
 		console.log("it is youtube");
 		type = "youtube";
@@ -91,7 +90,7 @@ TagNav.adminMediaController = SC.ObjectController.create(
 		
 		// TODO: clean any & or ? # from the end of the id
 	}
-	console.log("after testing");
+
 	if (type !== undefined && id !== undefined) {
 		media = TagNav.store.createRecord(TagNav.Media,
 			{ 

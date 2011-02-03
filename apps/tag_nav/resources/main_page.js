@@ -11,7 +11,7 @@ TagNav.mainPage = SC.Page.design({
   // Add childViews to this pane for views to display immediately on page 
   // load.
   mainPane: SC.MainPane.design({
-    childViews: 'backgroundView topBar bc mainContent'.w(),
+    childViews: 'backgroundView topBar breadcrumb mainContent'.w(),
 	defaultResponder: TagNav,
 
 	backgroundView: SC.View.design({
@@ -29,12 +29,17 @@ TagNav.mainPage = SC.Page.design({
 		})
     }),
 	
-    bc: TagNav.TagBc.design({
+    breadcrumb: TagNav.TagBc.design({
       layout: { left: 0, right: 0, height: 30, top: 50 },
 	  tagsBinding: 'TagNav.navigatorController.filterByTags',
 	  tagsToAddBinding: 'TagNav.navigatorController.tagsInFilter'
     }),
 
+    /*
+    The main content is a ContainerView which present either
+    1. welcomeView which show album strips
+    2. mediaGrid which present media items by tags
+    */
     mainContent: SC.ContainerView.design({
 		layout: { left: 0, right: 0, top: 100, bottom: 30 },
 		nowShowingBinding: 'TagNav.navigatorController.mainContentNowShowing'
