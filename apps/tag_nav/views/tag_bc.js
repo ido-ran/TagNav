@@ -168,9 +168,11 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 		var width = l.offsetWidth;
 		var top = l.offsetTop;
 		
-		this._tagCloudPopup.set('layout', { width: width * 0.7, height: document.height * 0.8 - top });
+		wsize = SC.RootResponder.responder.computeWindowSize();
+		
+		this._tagCloudPopup.set('layout', { width: width * 0.7, height: wsize.height * 0.8 - top });
 		this._tagCloudPopup.contentView.set('layout', { width: width * 0.7 });
-		this._tagCloudPopup.popup(this, SC.PICKER_POINTER, [1,2,1]);
+		this._tagCloudPopup.popup(this, SC.PICKER_POINTER, [3,3,3,3,3]);
 	}
 	
 	if (this.$('#currscope').within(elem)) {
