@@ -97,7 +97,7 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 		c.push('<div id="tagscope">');
 		c.push('  <ul id="tagscopenav">');
 		c.push('    <li class="scope">');
-		c.push('      <a class="currscope" id="currscope">Tags</a>');
+		c.push('      <a class="currscope" id="currscope">תוויות</a>');
 		c.push('    </li>');
 //		c.push('	<li class="tags">');
 //		c.push('       <ul>');
@@ -108,14 +108,10 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 		});
 //		c.push('<li class="tag first"><a class="onlytag" href="/tag/blogs">blogs</a>');
 //        c.push('  <a class="removetag" href="?removetag=blogs"><span>[x]</span></a></li>');
-//		c.push('       </ul>');
-//		c.push('    </li>');
-		c.push('    <li class="box">');
-//		c.push('        <form>');
-		c.push('            <input type="hidden" name="tagtype" id="addtagType" value="tag">');
-//		c.push('            <input type="text" size="25" name="addtag" id="addtag" autocomplete="off" value="Type another tag">');
-		c.push('            <input type="submit" name="addtagSubmit" value="" id="addtagSubmit">');
-//		c.push('        </form>');
+//		c.push('       </ul
+		c.push('    </li>');
+		c.push('    <li class="addscope">');
+		c.push('      <a class="currscope" id="addtagSubmit">דפדף</a>');
 		c.push('    </li>');
 		c.push('  </ul>');
 		c.push('</div>');

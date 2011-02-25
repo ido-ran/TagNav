@@ -27,8 +27,10 @@ TagNav.routes = SC.Object.create({
 	console.log(['tagsRoute', route]);
 	var tags = route.tags;
 	if (SC.empty(tags) || tags == "") {
+      console.log('tagsRoute - send action tagsClear');
 	  TagNav.sendAction('tagsClear', this);
 	} else {
+	  console.log('tagsRoute - send action tagsChanged');
       TagNav.sendAction('tagsChanged', this, { tags: route.tags });
     }
   },

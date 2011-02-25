@@ -36,6 +36,11 @@ TagNav.states.root = SC.Responder.create({
 	}
   },
 
+  welcome: function() {
+	this.removeActiveMdiaView();
+    TagNav.makeFirstResponder(TagNav.states.welcome);
+  },
+
   navigateTo: function(view) {
     var actView = this._activeMediaView;
     if (actView != null) actView.remove();
@@ -48,7 +53,9 @@ TagNav.states.root = SC.Responder.create({
   },
 
   tagsChanged: function(sender, args) {
+	console.log('tagsChanged - start');
 	if (TagNav.get('firstResponder') !== TagNav.states.mediaGrid) {
+		console.log('tagsChanged - remove active media view');
 		TagNav.states.root.removeActiveMdiaView();
 		TagNav.makeFirstResponder(TagNav.states.mediaGrid);
 	}
@@ -56,10 +63,13 @@ TagNav.states.root = SC.Responder.create({
 	var tags = args.tags;
 	var navTags = TagNav.navigatorController.get('filterByTags');
 	
+	console.log('tagsChanged - tags:%@'.fmt(tags));
+	
 	// If the tags in the arguments is different from the tags in the controller
 	// it means we are responding to route of tags. So we reset the tags in the controller
 	// to reflect the request from the route in the display.
 	if (tags != navTags.toString()) {
+		console.log('tagsChanged - tags are different from filterByTags');
 		// Clear the current tags
 		while (navTags.length > 0) navTags.popObject();
 
@@ -68,6 +78,8 @@ TagNav.states.root = SC.Responder.create({
 		for (var i = 0; i < tagArray.length; i++) {
          navTags.pushObject(tagArray[i]);
        }
+	} else {
+		console.log('tagsChanged - tags are NOT different from filterByTags');
 	}
 
     // We update the route to reflect the currently filter tags.
@@ -225,8 +237,10 @@ TagNav.mediaResponder = SC.Responder.extend({
 	} else {
 	  TagNav.makeFirstResponder(TagNav.states.welcome);
 	}
-  },
+  }
 
+  /*
+  I've remove this handlers to allow change in route to go back from media view to grid view.
   tagsClear: function() {
 	// Ignore tags changes when inside a media resppnder.
   },
@@ -234,7 +248,7 @@ TagNav.mediaResponder = SC.Responder.extend({
   tagsChanged: function(sender, args) {
 	// Ignore tags changes when inside a media resppnder.
   }
-  
+  */
 });
 
 TagNav.states.picasaAlbum = TagNav.mediaResponder.create({
@@ -249,10 +263,6 @@ TagNav.states.picasaAlbum = TagNav.mediaResponder.create({
       console.log('picasaAlbum::willLoseFirstResponder');	
     }
 	
-//	goBack: function() {
-	  //console.log('picasaAlbum::goBack');
-//	  return this._resetBackUrl();
-//	}
 });
 
 TagNav.states.youTubeVideo = TagNav.mediaResponder.create({
@@ -267,10 +277,6 @@ TagNav.states.youTubeVideo = TagNav.mediaResponder.create({
       console.log('youTubeVideo::willLoseFirstResponder');	
     }
 	
-//	goBack: function() {
-	  //console.log('picasaAlbum::goBack');
-//	  return this._resetBackUrl();
-//	}
 });
 
 TagNav.states.admin = TagNav.mediaResponder.create({

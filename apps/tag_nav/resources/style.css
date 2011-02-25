@@ -1,4 +1,9 @@
 
+.usermsg {
+	color: black;
+	margin: 0px 20px 0px 0px;
+}
+
 .login-form-view {
 	background: white;
 	color: black;
@@ -654,18 +659,37 @@ solid #E9E9E9;
 }
 #addtagSubmit
 {
-	background: transparent;
-	background: static_url('del_sprite_smallIcons.png') 0 -1140px no-repeat;
-	border: none;
-	color: transparent;
-	display: inline;
-	height: 14px;
-	margin: 0;;
-	position: absolute;
-	left: 6px;
-	top: 3px;
-	width: 10px;
 }
+
+#tagscopenav li.addscope
+{
+	_background-image: static_url('del_sprite_tagScopeNav.gif');
+	background: #205900;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 0 0 1em;
+}
+#tagscopenav li.addscope:hover
+{
+	background-color: #44BF00;
+	background-position: 100%
+-1200px;
+}
+
+#tagscopenav li.addscope a.currscope
+{
+	color: #fff;
+	display: block;
+	float: left;
+	font-weight: bold;
+	height: 15px;
+	margin: 0;
+	padding: 4px 14px 0 0;
+	text-decoration: none;
+}
+
+
+
 .jsEnabled
 #addtagSubmit
 {
