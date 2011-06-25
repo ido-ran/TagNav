@@ -29,12 +29,13 @@ TagNav.mainPage = SC.Page.design({
 		})
     }),
 	
-    breadcrumb: TagNav.TagBc.design({
+	breadcrumb: SC.View.design({}),
+/*    breadcrumb: TagNav.TagBc.design({
       layout: { left: 0, right: 0, height: 30, top: 50 },
 	  tagsBinding: 'TagNav.navigatorController.filterByTags',
 	  tagsToAddBinding: 'TagNav.navigatorController.tagsInFilter'
     }),
-
+*/
     /*
     The main content is a ContainerView which present either
     1. welcomeView which show album strips
@@ -51,10 +52,12 @@ TagNav.mainPage = SC.Page.design({
 	}),
 	
 	welcomeView: SC.View.design({
-	  childViews: 'albumStrip1'.w(),
+		backgroundColor: 'white',
+	  childViews: 'albumStrips'.w(),
 	  
-	  albumStrip1: TagNav.AlbumStripView.design({
-	    layout: { left: 0, top: 0, right: 0, height: 200 }
+	  albumStrips: SC.ListView.design({
+		contentBinding: 'TagNav.homeStripController.arrangedObjects',
+		templateName: 'homeAlbumStrips'
       })
 	}),
 

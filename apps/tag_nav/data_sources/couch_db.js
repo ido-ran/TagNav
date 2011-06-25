@@ -7,6 +7,7 @@
 sc_require('models/media');
 
 TagNav.MEDIAS_QUERY = SC.Query.local(TagNav.Media);
+TagNav.PARAMS_QUERY = SC.Query.local(TagNav.Params);
 
 /** @class
 
@@ -44,6 +45,14 @@ TagNav.CouchDbDataSource = SC.DataSource.extend(
 
 		return YES;
 	}
+	else if (query === TagNav.PARAMS_QUERY) {
+		SC.Request.getUrl(this.getServerView('allMedia')).json()
+		          .header('Accept', 'application/json')
+		          .notify(this, 'didFetchParams', store, query)
+		          .send();
+
+		return YES;		
+	}
 
     return NO ; // We do not support the requested query
   },
@@ -61,19 +70,36 @@ TagNav.CouchDbDataSource = SC.DataSource.extend(
       }
     },
 
+  didFetchParams: function(response, store, query) {
+      if(SC.ok(response)) {
+		var body = response.get('encodedBody');
+		var couchResponse = SC.json.decode(body);
+		var records = couchResponse.rows.getEach('value');
+
+         store.loadRecords(TagNav.Params, records);
+         store.dataSourceDidFetchQuery(query);
+      } else {
+         store.dataSourceDidErrorQuery(query, response);
+      }
+    },
+
   // ..........................................................
   // RECORD SUPPORT
   // 
 
   retrieveRecord: function(store, storeKey) {
-    throw "not support single record";
-
-	if (SC.kindOf(store.recordTypeFor(storeKey), Todos.Task)) {
+	if (SC.kindOf(store.recordTypeFor(storeKey), TagNav.Params)) {
 		var id = encodeURIComponent(store.idFor(storeKey));
-		SC.Request.getUrl(this.getServerPath(id))
-		          .header('Accept', 'application/json').json()
-		      .notify(this, 'didRetrieveTask', store, storeKey)
-		      .send();
+
+		hash = {"_id":"params","_rev":"2-e478b8afaea8516ac8d6d7024c01b8dd","homeLabels":"['\u05d7\u05d3\u05e9', '\u05e2\u05de\u05e7', '\u05d9\u05dc\u05d3\u05d9\u05dd']"};
+console.log(['params', hash]);
+//		store.dataSourceDidComplete(storeKey, hash);
+		return YES;
+				
+		SC.Request.getUrl(this.getServerPath(id)).json()
+		          .header('Accept', 'application/json')
+		          .notify(this, 'didRetrieveParams', store, storeKey)
+		          .send();
 
 		return YES;
 	}
@@ -81,7 +107,9 @@ TagNav.CouchDbDataSource = SC.DataSource.extend(
     return NO ; // return YES if you handled the storeKey
   },
 
-  __not_impl_didRetrieveTask: function(response, store, storeKey) {
+  didRetrieveParams: function(response, store, storeKey) {
+		console.log(['retrieveParam', dataHash]);
+		return;
     if (SC.ok(response)) {
       var dataHash = response.get('body').content;
       store.dataSourceDidComplete(storeKey, dataHash);

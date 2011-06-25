@@ -281,7 +281,15 @@ TagNav.states.youTubeVideo = TagNav.mediaResponder.create({
 
 TagNav.states.admin = TagNav.mediaResponder.create({
 	name: 'admin',
-	nextResponder: TagNav.states.root
+	nextResponder: TagNav.states.root,
+
+  tagsClear: function() {
+	// Ignore tags changes when inside admin resppnder.
+  },
+
+  tagsChanged: function(sender, args) {
+	// Ignore tags changes when inside admin resppnder.
+  }
 });
 
 TagNav.states.adminLogin = TagNav.mediaResponder.create({
