@@ -53,11 +53,19 @@ TagNav.mainPage = SC.Page.design({
 	
 	welcomeView: SC.View.design({
 		backgroundColor: 'white',
-	  childViews: 'albumStrips'.w(),
+	    childViews: 'albumStrips'.w(),
 	  
-	  albumStrips: SC.ListView.design({
+	  albumStrips: 	SC.ScrollView.design({
+		    layout: { left: 0, right: 0, top: 0, bottom: 0 },
+		    hasHorizontalScroller: YES,
+	        hasVerticalScroller: YES,
+		    borderStyle: SC.BORDER_NONE,
+
+			contentView:SC.ListView.design({
 		contentBinding: 'TagNav.homeStripController.arrangedObjects',
-		templateName: 'homeAlbumStrips'
+		exampleView: TagNav.HomeTagListItemView,
+		rowHeight: 240
+			})
       })
 	}),
 

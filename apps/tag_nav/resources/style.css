@@ -1,4 +1,14 @@
 
+.sc-view.sc-label-view.homeTagTitle {
+	color: orange;
+	background: black;
+	font-size: 48px; line-height: 1.0;
+}
+
+.homeTagGrid {
+	background: black;
+}
+
 .usermsg {
 	color: black;
 	margin: 0px 20px 0px 0px;

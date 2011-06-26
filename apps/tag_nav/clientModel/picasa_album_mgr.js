@@ -34,21 +34,20 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 		success: function(data) {
 			SC.run(function() {
 				try {
-				
 				// Extract the album cover
 				var icon = data.feed.icon.$t.replace(new RegExp("/s160-c/", "g"), "/");
 				icon = icon + '?imgmax=200&crop=1';
 				album.set('thumbnailUrl', icon);
-			    SC.imageCache.loadImage(icon);
+			    SC.imageQueue.loadImage(icon);
 
 				// Extract the album name
 				var title = data.feed.title.$t;
 				album.set('title', title);
-				
+
 				// Extract entries
-				album.set('numphotos', data.feed.gphoto$numphotos);
+				album.set('numphotos', data.feed.gphoto$numphotos.$t);
 				
-				data.feed.entry.forEach(function(e, i) {			
+				data.feed.entry.forEach(function(e, i) {
 				  var photo = TagNav.PicasaPhoto.create();
 				  photo.set('title', e.title.$t);
 				  photo.set('content', e.content.src);
@@ -58,7 +57,7 @@ TagNav.picasaAlbumMgr = SC.Object.create(
 				  if (album.thumbnailPhotos.length < 10) {
 				    // Start caching the image
 				    album.thumbnailPhotos.pushObject(photo);
-				    SC.imageCache.loadImage(photo.get('smallThumbnailUrl'));
+				    SC.imageQueue.loadImage(photo.get('smallThumbnailUrl'));
 			      }
 				});
 				
