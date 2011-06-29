@@ -69,26 +69,44 @@ TagNav.mainPage = SC.Page.design({
       })
 	}),
 
-    mediaGrid: SC.ScrollView.design({
+    mediaGrid: SC.View.design({
 	    layout: { left: 0, right: 0, top: 0, bottom: 0 },
-	    hasHorizontalScroller: YES,
-        hasVerticalScroller: YES,
-	    borderStyle: SC.BORDER_NONE,
+		childViews: 'tagList grid'.w(),
 		
-		contentView: SC.GridView.design({
-		  backgroundColor: 'black',
-		  contentBinding: 'TagNav.releventMediaController.arrangedObjects',
-		  selectionBinding: 'TagNav.releventMediaController.selection',
-		  contentValueKey: 'title',
-		  columnWidth: 200,
-		  rowHeight: 200,
-		  isEditable: NO,
-		  contentExampleViewKey: 'createCoverExampleView',
-	      //exampleView: TagNav.PicasaAlbumCoverListItemView,
-	      action: 'mediaSelected',
-	      target: 'TagNav.releventMediaController',
-	      actOnSelect: YES
-	    })
+		tagList: SC.ListView.design({
+			layout: { left: 0, width: 200, top: 0, bottom: 0 },
+			backgroundColor: 'black',
+			contentBinding: 'TagNav.tagNavigationController.arrangedObjects',
+			selectionBinding: 'TagNav.tagNavigationController.selection',
+		    action: 'tagSelected',
+		    target: 'TagNav.tagNavigationController',
+	      	actOnSelect: YES,
+			exampleView: SC.ListItemView.design({
+				classNames: 'tagnav-TagListItem'
+			})
+		}),
+		
+		grid: SC.ScrollView.design({
+		    layout: { left: 200, right: 0, top: 0, bottom: 0 },
+		    hasHorizontalScroller: YES,
+	        hasVerticalScroller: YES,
+		    borderStyle: SC.BORDER_NONE,
+		
+			contentView: SC.GridView.design({
+			  backgroundColor: 'black',
+			  contentBinding: 'TagNav.releventMediaController.arrangedObjects',
+			  selectionBinding: 'TagNav.releventMediaController.selection',
+			  contentValueKey: 'title',
+			  columnWidth: 200,
+			  rowHeight: 200,
+			  isEditable: NO,
+			  contentExampleViewKey: 'createCoverExampleView',
+		      //exampleView: TagNav.PicasaAlbumCoverListItemView,
+		      action: 'mediaSelected',
+		      target: 'TagNav.releventMediaController',
+		      actOnSelect: YES
+		    })
+		})
 	 }),
 	
 	 picasaAlbumGrid: SC.ScrollView.design({

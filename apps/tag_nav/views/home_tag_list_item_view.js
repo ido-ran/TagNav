@@ -18,7 +18,15 @@ TagNav.HomeTagListItemView = SC.View.extend(
 	tagLabel: SC.LabelView.design({
 		layout: { left: 0, right: 0, top: 0, height: 48 },
 		valueBinding: '.parentView.content.tag',
-		classNames: 'homeTagTitle'
+		classNames: 'homeTagTitle',
+		
+		mouseDown: function(evt) {
+			var elem = this.$()[0];
+			var tag = SC.$(elem).text();
+			
+			TagNav.navigatorController.filterByTags.pushObject(tag);
+			return YES;
+		}
 	}),
 	
 	albumsView: SC.ScrollView.design({
@@ -33,7 +41,11 @@ TagNav.HomeTagListItemView = SC.View.extend(
 			contentBinding: '.parentView.parentView.parentView.content.albums',
 			contentExampleViewKey: 'createCoverExampleView',
 			columnWidth: 200,
-  			rowHeight: 200
+  			rowHeight: 200,
+		  	selectionBinding: 'TagNav.releventMediaController.selection',
+			action: 'mediaSelected',
+		    target: 'TagNav.releventMediaController',
+		    actOnSelect: YES
 		})
 	})
 });

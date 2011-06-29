@@ -20,6 +20,8 @@ TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navi
   filterByTags: null,
   // array of strings
   tagsInFilter: null,
+  // array of strings
+  tagsInFilterList: null,
 
   /* Hold the Media records that are relevent to the tags selected by the user. */
    // array of MediaItem
@@ -119,6 +121,12 @@ TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navi
 
     // remove tags we already filter by.
     this.set('tagsInFilter', uniqTags);
+
+	var tagNameList = [];
+	for (var tagName in uniqTags) {
+		tagNameList.push(tagName);
+	}
+	this.set('tagsInFilterList', tagNameList);
 
     var x = uniqMedia.toArray();
     // TODO: sort

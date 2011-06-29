@@ -1,4 +1,9 @@
 
+.sc-view.sc-list-item-view.tagnav-TagListItem {
+	color: orange;
+	font-size: 20px;
+}
+
 .sc-view.sc-label-view.homeTagTitle {
 	color: orange;
 	background: black;
@@ -23,7 +28,7 @@
 
 }
 
-.image-label {
+.sc-view.sc-label-view.image-label {
 	color: white;
 	font-size: x-large;
 	line-height:8em;
