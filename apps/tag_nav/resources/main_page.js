@@ -29,13 +29,12 @@ TagNav.mainPage = SC.Page.design({
 		})
     }),
 	
-	breadcrumb: SC.View.design({}),
-/*    breadcrumb: TagNav.TagBc.design({
+    breadcrumb: TagNav.TagBc.design({
       layout: { left: 0, right: 0, height: 30, top: 50 },
 	  tagsBinding: 'TagNav.navigatorController.filterByTags',
 	  tagsToAddBinding: 'TagNav.navigatorController.tagsInFilter'
     }),
-*/
+
     /*
     The main content is a ContainerView which present either
     1. welcomeView which show album strips

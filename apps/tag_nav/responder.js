@@ -205,7 +205,7 @@ TagNav.states.welcome = SC.Responder.create({
 	  SC.routes.set('location', 'welcome');
 	  TagNav.navigatorController.set('mainContentNowShowing', 'TagNav.mainPage.mainPane.welcomeView');
 	  // Clear any keywords might be in the current filter.
-	  TagNav.navigatorController.filterByTags.length = 0;
+	  TagNav.navigatorController.clearTags();
 	},
 
     willLoseFirstResponder: function(responder) {

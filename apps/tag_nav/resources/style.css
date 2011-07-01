@@ -2,12 +2,25 @@
 .sc-view.sc-list-item-view.tagnav-TagListItem {
 	color: orange;
 	font-size: 20px;
+	direction:rtl;
+}
+
+.sc-view.sc-list-item-view.odd.tagnav-TagListItem {
+	background-color: #333333;
+}
+
+.sc-view.sc-list-item-view.tagnav-TagListItem:hover {
+	color: #FF5500;
 }
 
 .sc-view.sc-label-view.homeTagTitle {
 	color: orange;
 	background: black;
 	font-size: 48px; line-height: 1.0;
+}
+
+.sc-view.sc-label-view.homeTagTitle:hover {
+	color: #FF5500;
 }
 
 .homeTagGrid {
@@ -125,6 +138,8 @@
 	padding-right: 0;
 	position: relative;
 	zoom: 1;
+	list-style: none;
+	font-size:20px;
 }
 #tagscopenav li a
 {

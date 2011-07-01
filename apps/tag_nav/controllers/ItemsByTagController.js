@@ -45,6 +45,11 @@ TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navi
     this.get("filterByTags").addObserver('[]', this, this._nvgtor_filterByTagsDidChanged);
   },
 
+  clearTags: function() {
+	var filterByTags = this.get('filterByTags');
+	if (filterByTags.length > 0) filterByTags.removeObjects(filterByTags);
+  },
+
   _tagnav_filterByTags_didReplace: function () {
 
   }.observes('filterByTags'),

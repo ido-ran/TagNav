@@ -110,9 +110,9 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 //        c.push('  <a class="removetag" href="?removetag=blogs"><span>[x]</span></a></li>');
 //		c.push('       </ul
 		c.push('    </li>');
-		c.push('    <li class="addscope">');
-		c.push('      <a class="currscope" id="addtagSubmit">דפדף</a>');
-		c.push('    </li>');
+//		c.push('    <li class="addscope">');
+//		c.push('      <a class="currscope" id="addtagSubmit">דפדף</a>');
+//		c.push('    </li>');
 		c.push('  </ul>');
 		c.push('</div>');
 //	}
@@ -124,14 +124,14 @@ TagNav.TagBc = SC.View.extend(SC.Control,
 	var input = this.$('addtag');
     SC.Event.add(input, 'focus', this, this._input_DidKeyDown);
 	SC.Event.add(input, 'onchange', this, this._input_DidChange);
-    sc_super();
+//    sc_super();
   },
 
   willDestroyLayer: function() {
 	var input = this.$('addtag');
 	SC.Event.remove(input, 'keydown',  this, this._input_DidKeyDown);
-//	SC.Event.remove(input, 'onchange', this, this._input_DidChange);
-    sc_super();
+	SC.Event.remove(input, 'onchange', this, this._input_DidChange);
+//    sc_super();
   },
 
   _input_DidKeyDown: function(evt) {
