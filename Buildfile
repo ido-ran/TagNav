@@ -5,7 +5,7 @@
 
 # url_prefix is used to add CouchDB previx to the script include blocks.
 # load_fixtures is used to test the application in production using the fixtures.
-config :all, :required => :sproutcore
+config :all, :required => :sproutcore, :layout => 'tag_nav:lib/index.rhtml'
 
 # in the production CouchDB there is a rewrite rule that map /db to the root of tagnav database.
 proxy '/db', :to => 'localhost:5984', :url => '/tagnav'
