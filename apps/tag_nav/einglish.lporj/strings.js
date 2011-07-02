@@ -28,5 +28,9 @@ SC.stringsFor('English', {
   "_editLabelExplanation": "You can select media in the grid and then edit the label of the selected media",
   "_deleteMediaTitle": "Delete media from collection",
   "_deleteMediaMessage": "You are about to delete a media from the collection. Are you sure you want to delete the media from the collection?",
-  "_totalMediaTitle": "Total media in collection:"
+  "_totalMediaTitle": "Total media in collection:",
+  "_totalSelectedMediaTitle": "Selected media:",
+  "_changeSingleTagTitle": "Tag",
+  "_addSingleTag": "Add Tag",
+  "_removeSingleTag": "Remove Tag"
 }) ;

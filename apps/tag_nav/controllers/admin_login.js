@@ -40,10 +40,26 @@ TagNav.adminLoginController = SC.ObjectController.create(
 	$.ajax({
 	        type: "POST", url: "_session", dataType: "json",
 	        data: {name: username, password: password},
-	        complete: function(req) {
+			
+			success: function(resp) {
+			  SC.run(function() {
+	            TagNav.adminLoginController.set('isAuthenticated', YES);
+				TagNav.sendAction('adminAuthenticated');
+			  });
+			},
+			
+			error: function(jqXHR, textStatus, errorThrown) {
+			  SC.run(function() {
+				TagNav.adminLoginController.set('isAuthenticating', NO);
+				alert('error ' + errorThrown);
+			  });				
+			}
+	
+/*	        complete: function(req) {
+		return;
 			  SC.run(function() {
 				  TagNav.adminLoginController.set('isAuthenticating', NO);
-				
+				console.log(['response', req]);
 		          var resp = $.httpData(req, "json");
 		          if (req.status == 200) {
 		            TagNav.adminLoginController.set('isAuthenticated', YES);
@@ -54,6 +70,7 @@ TagNav.adminLoginController = SC.ObjectController.create(
 		          }
               })
 	        }
+	*/
 	 });
   },
 

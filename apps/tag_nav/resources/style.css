@@ -1,4 +1,9 @@
 
+/* this style is turning textarea in admin panel to be rtl */
+textarea.field {
+	direction: rtl;
+}
+
 .sc-view.sc-list-item-view.tagnav-TagListItem {
 	color: orange;
 	font-size: 20px;

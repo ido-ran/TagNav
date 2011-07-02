@@ -47,7 +47,7 @@ TagNav.homeStripController = SC.ArrayController.create(
 
         		if (hasTheTag) {
 					if (mediaByTag[tag] === undefined) mediaByTag[tag] = [];
-					if (mediaByTag[tag].length < 4) {
+					if (mediaByTag[tag].length < 6) {
           				// Add the media to relevent media array.
 						mediaByTag[tag].pushObject(item);
 						break;

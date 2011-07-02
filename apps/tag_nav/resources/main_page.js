@@ -72,16 +72,22 @@ TagNav.mainPage = SC.Page.design({
 	    layout: { left: 0, right: 0, top: 0, bottom: 0 },
 		childViews: 'tagList grid'.w(),
 		
-		tagList: SC.ListView.design({
+		tagList: SC.ScrollView.design({
 			layout: { left: 0, width: 200, top: 0, bottom: 0 },
-			backgroundColor: 'black',
-			contentBinding: 'TagNav.tagNavigationController.arrangedObjects',
-			selectionBinding: 'TagNav.tagNavigationController.selection',
-		    action: 'tagSelected',
-		    target: 'TagNav.tagNavigationController',
-	      	actOnSelect: YES,
-			exampleView: SC.ListItemView.design({
-				classNames: 'tagnav-TagListItem'
+		    hasHorizontalScroller: NO,
+	        hasVerticalScroller: YES,
+		    borderStyle: SC.BORDER_NONE,
+			
+			contentView: SC.ListView.design({
+				backgroundColor: 'black',
+				contentBinding: 'TagNav.tagNavigationController.arrangedObjects',
+				selectionBinding: 'TagNav.tagNavigationController.selection',
+			    action: 'tagSelected',
+			    target: 'TagNav.tagNavigationController',
+		      	actOnSelect: YES,
+				exampleView: SC.ListItemView.design({
+					classNames: 'tagnav-TagListItem'
+				})
 			})
 		}),
 		

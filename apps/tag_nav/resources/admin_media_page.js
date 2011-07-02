@@ -18,11 +18,16 @@ TagNav.adminMediaPage = SC.Page.design({
 	topBar: SC.ToolbarView.design({
 	  layout: { top: 0, left: 0, right: 0, height: 50 },
 	  anchorLocation: SC.ANCHOR_TOP,
-	  childViews: 'labelView'.w(),
+	  childViews: 'labelView filterBar'.w(),
 	
 	    labelView: SC.LabelView.design({
 			layout: { left: 0, height: 30 },
 			value: 'PhotoBook Admin'
+		}),
+		
+		filterBar: SC.TextFieldView.design({
+			layout: { right: 15, top: 15, width: 200, height: 18 },
+			valueBinding: 'TagNav.adminMediaArrayController.filterByTags'
 		})
     }),
 	
@@ -51,16 +56,13 @@ TagNav.adminMediaPage = SC.Page.design({
 			  rowHeight: 200,
 			  isEditable: NO,
 			  contentExampleViewKey: 'createCoverExampleView'
-		      //action: 'mediaSelected',
-		      //target: 'TagNav.releventMediaController',
-		      //actOnSelect: YES
 		    })
 		 }),
 		
 		editorView: SC.View.design({
 			layout: { right: 0, width: 300, top: 0, bottom: 0 },
 			backgroundColor: 'green',
-			childViews: 'newPanel labelEditInfo typeLabel typeText  tagsLabel tagsText  saveButton deleteButton totalMediaLabel totalMediaCount'.w(),
+			childViews: 'newPanel labelEditInfo typeLabel typeText  tagsLabel tagsText  saveButton deleteButton singleTagLabel singleTagText singleTagAddButton singleTagRemoveButton totalMediaLabel totalMediaCount selMediaLabel selMediaCount'.w(),
 			
 			newPanel: SC.View.design({
 				layout: { height: 200 },
@@ -92,7 +94,7 @@ TagNav.adminMediaPage = SC.Page.design({
 			
 			typeText: SC.TextFieldView.design({
 				layout: { top: 200, left: 5, height: 20, width: 240 },
-				valueBinding: 'TagNav.adminMediaController._id',
+				valueBinding: 'TagNav.adminMediaController.mediaID',
 				isEnabled: NO,
 				hit: 'Select media in the grid'
 			}),
@@ -111,7 +113,7 @@ TagNav.adminMediaPage = SC.Page.design({
 			}),
 			
 			saveButton: SC.ButtonView.design({
-				layout: { top: 300, right: 5, width: 90, height: 26 },
+				layout: { top: 280, right: 5, width: 90, height: 26 },
 				title: "_save".loc(),
 				isDefault: YES,
 				target: 'TagNav.adminMediaController',
@@ -120,22 +122,61 @@ TagNav.adminMediaPage = SC.Page.design({
 			}),
 			
 			deleteButton: SC.ButtonView.design({
-				layout: { top: 300, left: 5, width: 90, height: 26 },
+				layout: { top: 280, left: 5, width: 90, height: 26 },
 				title: "_deleteMedia".loc(),
 				action: 'deleteMedia',
 				target: 'TagNav.adminMediaController',
-				i1sEnabledBinding: 'TagNav.adminMediaController.hasMediaToEdit'
+				isEnabledBinding: 'TagNav.adminMediaController.hasMediaToEdit'
+			}),
+			
+			singleTagLabel: SC.LabelView.design({
+				layout: { top: 310, right: 0, width: 50, height: 18 },
+				textAlign: SC.ALIGN_LEFT,
+				value: '_changeSingleTagTitle'.loc()
+			}),
+			
+			singleTagText: SC.TextFieldView.design({
+				layout: { top: 310, left: 5, height: 20, width: 240 },
+				valueBinding: 'TagNav.adminMediaController.singleTag',
+				isEnabledBinding: 'TagNav.adminMediaController.hasMediaToEdit'
+			}),
+			
+			singleTagAddButton: SC.ButtonView.design({
+				layout: { top: 340, left: 5, width: 90, height: 26 },
+				title: '_addSingleTag'.loc(),
+				action: 'addSingleTag',
+				target: 'TagNav.adminMediaController',
+				isEnabledBinding: 'TagNav.adminMediaController.isSignleTagEditEnabled'
+			}),
+			
+			singleTagRemoveButton: SC.ButtonView.design({
+				layout: { top: 340, right: 5, width: 90, height: 26 },
+				title: '_addSingleTag'.loc(),
+				action: 'removeSingleTag',
+				target: 'TagNav.adminMediaController',
+				isEnabledBinding: 'TagNav.adminMediaController.isSignleTagEditEnabled'				
 			}),
 			
 			totalMediaLabel: SC.LabelView.design({
-				layout: { top: 340, left: 10, width: 150 },
+				layout: { top: 370, left: 10, width: 150 },
 				value: '_totalMediaTitle'.loc()
 			}),
 			
 			totalMediaCount: SC.LabelView.design({
-				layout: { top: 340, left: 160, width: 100 },
+				layout: { top: 370, left: 160, width: 100 },
 				valueBinding: 'TagNav.adminMediaArrayController.length'
-			})
+			}),
+
+			selMediaLabel: SC.LabelView.design({
+				layout: { top: 390, left: 10, width: 150 },
+				value: '_totalSelectedMediaTitle'.loc()
+			}),
+			
+			selMediaCount: SC.LabelView.design({
+				layout: { top: 390, left: 160, width: 100 },
+				valueBinding: 'TagNav.adminMediaController.totalSelectedMedia'
+			})			
+
 		})
 	})
   }),

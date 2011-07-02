@@ -10,13 +10,23 @@
 
   @extends SC.Object
 */
-TagNav.adminMediaController = SC.ObjectController.create(
+TagNav.adminMediaController = SC.ArrayController.create(
 /** @scope TagNav.adminMediaController.prototype */ {
 
-  contentBinding: SC.Binding.single('TagNav.adminMediaArrayController.selection'),
+  /* 
+  The content of this controller is bound to the selection of adminMediaArrayController
+  which can be multiple album selection
+  */
+  contentBinding: 'TagNav.adminMediaArrayController.selection',
 
-  /* Editable properties of media */
+  /* Tag of selected media that is editable by the uesr */
   editableTags: null,
+
+  /* single tag text to be either add or remove from all media */
+  singleTag: null,
+
+  /* read-only property contain the tags of the selected media before edit began */
+  selectedMediaTags: null,
 
   /* YES if there is something to save, NO otherwise */
   isAbleToSave: NO,
@@ -26,12 +36,55 @@ TagNav.adminMediaController = SC.ObjectController.create(
   /* The URL for the new media */
   newMediaUrl: '',
 
+  orderBy: function(x,y) { return 1; },
+
+  totalSelectedMedia: function() {
+	var l = this.get('length');
+	if (l === 0) return "אין אלבומים בחורים";
+	else if (l === 1) return "אלבום אחד";
+	else return l + " אלבומים";
+  }.property('length').cacheable(),
+
   saveMedia: function() {
-    var media = this.get('content');
+    var medias = this.get('content');
     var tagsArray = this.get('editableTags').split(',');
-    media.set('tags', tagsArray);
-    media.commitRecord();
+	for (var i=0; i<tagsArray.length; i++) {
+		tagsArray[i] = tagsArray[i].trim();
+	}
+    medias.forEach(function(m) {
+		m.set('tags', tagsArray);
+		m.commitRecord();
+    });
   },
+
+  removeSingleTag: function() {
+	var medias = this.get('content');
+    var tag = this.get('singleTag').trim();
+    medias.forEach(function(m) {
+		var mediaTags = m.get('tags').copy();
+		mediaTags.removeObject(tag);
+		m.set('tags', mediaTags);
+		m.commitRecord();
+    });
+  },
+
+  addSingleTag: function() {
+	var medias = this.get('content');
+    var tag = this.get('singleTag').trim();
+    medias.forEach(function(m) {
+		var mediaTags = m.get('tags').copy();
+		mediaTags.pushObject(tag);
+		m.set('tags', mediaTags);
+		m.commitRecord();
+    });
+  },
+
+  isSignleTagEditEnabled: function() {
+	var singleTag = this.get('singleTag');
+	var hasMediaToEdit = this.get('hasMediaToEdit');
+	var isEnabled = (singleTag != '' && hasMediaToEdit);
+	return isEnabled;
+  }.property('singleTag,hasMediaToEdit').cacheable(),
 
   showAddNewDialog: function() {
 	var newDialog = TagNav.getPath('adminMediaPage.addNewSheet');
@@ -110,22 +163,40 @@ TagNav.adminMediaController = SC.ObjectController.create(
 
   _contentDidChanged: function() {
 	this.set('hasMediaToEdit', NO);
-
+	this.set('mediaID', null);
+	
 	var media = this.get('content');
-	if (!media || !media.isRecord) {
+	if (!media) {
+		// There is no media at all.
 		this.set('editableTags', null);
+	}
+	else if (media.get('length') == 1) {
+		var mediaRec = media.firstObject();
+		this.set('editableTags', mediaRec.get('tags').toString());
+		this.set('selectedMediaTags', mediaRec.get('tags').toString());
+		this.set('mediaID', mediaRec.get('_id'));
+		this.set('hasMediaToEdit', YES);
+		
 	} else {
-		this.set('editableTags', media.get('tags').toString());
+		// Multiple media selected
+		var aggrTags = SC.Set.create();
+		media.forEach(function(m) {
+			aggrTags.addEach(m.get('tags'));
+		});
+		
+		var aggrTagsArray = aggrTags.toArray();
+		this.set('editableTags', aggrTagsArray.toString());
+		this.set('selectedMediaTags', aggrTagsArray.toString());
 		this.set('hasMediaToEdit', YES);
 	}
-  }.observes('*content'),
+  }.observes('length'),
 
   _editableTagsDidChanged: function() {
 	var hasMediaToEdit = this.get('hasMediaToEdit');
 	var media = this.get('content');
-	
-	if (media) {
-		var currTags = media.get('tags').toString();
+
+	if (hasMediaToEdit && media) {
+		var currTags = this.get('selectedMediaTags');
 		var editableTags = this.get('editableTags');
 		var hasChanged = (currTags != editableTags);
 		

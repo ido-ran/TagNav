@@ -23,7 +23,7 @@ TagNav.main = function main() {
   // create multiple pages and panes.  
   TagNav.getPath('mainPage.mainPane').append() ;
 
-  TagNav.homeStripController.set('homeLabels', ['חדש','עמק', '2008', '2009']);
+  TagNav.homeStripController.set('homeLabels', ['צילומים חדשים', 'ענפים', 'חגים', 'ערוץ הנוער והילדים', 'טיולים וארועים', 'אנחנו', 'אמנות וטכנולוגיה', 'תמונות משק', 'ארכיון עין חרוד', 'פינת חי', 'טבע']);
 
   var q = SC.Query.local(TagNav.Media);
   var allMedia = TagNav.store.find(q);
