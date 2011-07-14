@@ -30,7 +30,6 @@ TagNav.homeStripController = SC.ArrayController.create(
 
 	_allMediaStatusChanged: function() {
 		var s = this.getPath('allMedia.status');
-		console.log(['status', s]);
 		if (s === SC.Record.READY_CLEAN) this._buildHomeDataStructure();
 	}.observes('*allMedia.status'),
 	
@@ -63,7 +62,6 @@ TagNav.homeStripController = SC.ArrayController.create(
 			tagItem.set('albums', mediaByTag[tag]);
 
 			homeTags.push(tagItem);
-			console.log(['item', tagItem]);
 		}
 		this.set('content', homeTags);
 	}

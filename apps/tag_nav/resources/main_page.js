@@ -51,7 +51,7 @@ TagNav.mainPage = SC.Page.design({
 	}),
 	
 	welcomeView: SC.View.design({
-		backgroundColor: 'white',
+		backgroundColor: 'black',
 	    childViews: 'albumStrips'.w(),
 	  
 	  albumStrips: 	SC.ScrollView.design({

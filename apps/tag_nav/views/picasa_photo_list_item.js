@@ -13,7 +13,6 @@
 TagNav.PicasaPhotoListItemView = SC.View.extend(
 /** @scope TagNav.PicasaPhotoListItemView.prototype */ {
 
-
   createChildViews: function(){ 
     var childViews = []; 
     var content = this.get('content'); 
@@ -21,8 +20,10 @@ TagNav.PicasaPhotoListItemView = SC.View.extend(
 
     var photoView = this.createChildView( 
       SC.ImageView.extend({ 
+		backgroundColor: '#333',
         layout: {top: 0, centerX: 0, width: 180, height: 180},
-        valueBinding: SC.binding('.thumbnailUrl', content)
+        valueBinding: SC.binding('.thumbnailUrl', content),
+		useImageQueue: NO
       })
     );
     childViews.push(photoView);

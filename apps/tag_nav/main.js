@@ -13,6 +13,9 @@
 //
 TagNav.main = function main() {
 
+  // Set the maximum image load concurrently to 20.
+  SC.imageQueue.set('loadLimit', 30);
+
   TagNav.routes.setup();
 
   TagNav.makeFirstResponder(TagNav.states.initializing);

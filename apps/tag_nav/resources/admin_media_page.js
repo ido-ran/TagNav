@@ -151,7 +151,7 @@ TagNav.adminMediaPage = SC.Page.design({
 			
 			singleTagRemoveButton: SC.ButtonView.design({
 				layout: { top: 340, right: 5, width: 90, height: 26 },
-				title: '_addSingleTag'.loc(),
+				title: '_removeSingleTag'.loc(),
 				action: 'removeSingleTag',
 				target: 'TagNav.adminMediaController',
 				isEnabledBinding: 'TagNav.adminMediaController.isSignleTagEditEnabled'				
