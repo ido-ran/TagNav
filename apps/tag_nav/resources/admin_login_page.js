@@ -32,7 +32,7 @@ TagNav.adminLoginPage = SC.Page.design({
 	  childViews: 'userLabel userText passLabel passText loginButton'.w(),
 
       userLabel: SC.LabelView.design({
-	    layout: { left: 0, width: 100, height: 30, top: 50 },
+	    layout: { left: 10, width: 100, height: 30, top: 55 },
 	    value: 'Username'
       }),
 
@@ -42,8 +42,8 @@ TagNav.adminLoginPage = SC.Page.design({
       }),
 
       passLabel: SC.LabelView.design({
-	    layout: { left: 0, width: 100, height: 30, top: 100 },
-	    value: 'Username'
+	    layout: { left: 10, width: 100, height: 30, top: 105 },
+	    value: 'Password'
       }),
 
       passText: SC.TextFieldView.design({

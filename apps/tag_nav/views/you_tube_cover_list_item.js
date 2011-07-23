@@ -42,6 +42,7 @@ TagNav.YouTubeCoverListItemView = SC.View.extend(SC.ContentDisplay,
 
     var titleView = this.createChildView( 
       SC.View.extend({ 
+		classNames: 'media-title'.w(),
         layout: { bottom: 0, centerX: 0, width: 200, height: 40 }, 
         childViews: 'lbl'.w(),
         lbl: SC.LabelView.design({
@@ -53,9 +54,6 @@ TagNav.YouTubeCoverListItemView = SC.View.extend(SC.ContentDisplay,
       }) 
     ); 
 
-    if (-1 == titleView.classNames.indexOf('media-title')) {
-	  titleView.classNames.push('media-title');
-    }
     childViews.push(titleView); 
 
     var picasaLogoView = this.createChildView(

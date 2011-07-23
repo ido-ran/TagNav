@@ -52,14 +52,14 @@ textarea.field {
 	line-height:8em;
 }
 
-.sc-view.media-title {
+.media-title {
 	color: white;
 	background: rgba(0,0,0, 0.6);
 	text-overflow:ellipsis;
 	overflow: hidden;
 }
 
-.selected .sc-view.media-title {
+.selected .media-title {
 	color: white;
 	background: rgba(0,0,255, 0.6);
 }
