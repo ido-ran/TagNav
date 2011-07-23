@@ -59,10 +59,10 @@ TagNav.homeStripController = SC.ArrayController.create(
 		for (var tag in mediaByTag) {
 			var tagItem = TagNav.HomeTagItem.create();
 			tagItem.set('tag', tag);
-			tagItem.set('albums', mediaByTag[tag]);
+			tagItem.set('albums', TagNav.SortMedia(mediaByTag[tag]));
 
 			homeTags.push(tagItem);
 		}
 		this.set('content', homeTags);
-	}
+	},
 }) ;

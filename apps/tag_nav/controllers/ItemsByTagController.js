@@ -133,9 +133,10 @@ TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navi
 	}
 	this.set('tagsInFilterList', tagNameList);
 
-    var x = uniqMedia.toArray();
-    // TODO: sort
-    this.set('releventMedias', x);
+	// Sort the media by date then title
+    var unsortMedia = uniqMedia.toArray();
+    var sortMedia = TagNav.SortMedia(unsortMedia);
+    this.set('releventMedias', sortMedia);
   },
 
   _addToTagHash: function (tagHash, itemTags, filterByTags) {

@@ -22,6 +22,9 @@ TagNav.adminMediaController = SC.ArrayController.create(
   /* Tag of selected media that is editable by the uesr */
   editableTags: null,
 
+  /* date of the selected media that is editable by the user */
+  editableDate: null,
+
   /* single tag text to be either add or remove from all media */
   singleTag: null,
 
@@ -48,11 +51,17 @@ TagNav.adminMediaController = SC.ArrayController.create(
   saveMedia: function() {
     var medias = this.get('content');
     var tagsArray = this.get('editableTags').split(',');
+	var editableDate = this.get('editableDate');
+	var date = null;
+	if (editableDate != null) {
+		date = SC.DateTime.parse(editableDate, "%Y-%m-%d");
+	}
 	for (var i=0; i<tagsArray.length; i++) {
 		tagsArray[i] = tagsArray[i].trim();
 	}
     medias.forEach(function(m) {
 		m.set('tags', tagsArray);
+		if (date != null) m.set('date', date);
 		m.commitRecord();
     });
   },
@@ -108,7 +117,7 @@ TagNav.adminMediaController = SC.ArrayController.create(
   },
 
   deleteMedia: function() {
-	var media = this.get('content');
+	var medias = this.get('content');
 
 	SC.AlertPane.warn(
 		"_deleteMediaTitle".loc(), 
@@ -118,8 +127,12 @@ TagNav.adminMediaController = SC.ArrayController.create(
 		  alertPaneDidDismiss: function(pane, status) {
 			if (status === SC.BUTTON1_STATUS) {
 		      TagNav.adminMediaArrayController.selectObject(null);
-			  media.destroy();
-			  media.commitRecord();
+			  medias.forEach(function(m) {
+				  m.destroy();
+				  m.commitRecord();
+			  });
+			
+			  TagNav.adminMediaArrayController._reload();
 		    }
           }
 		}
@@ -144,7 +157,7 @@ TagNav.adminMediaController = SC.ArrayController.create(
 		// TODO: clean any & or ? # from the end of the id
 	}
 
-	if (type !== undefined && id !== undefined) {
+	if (!SC.none(type) && !SC.none(id)) {
 		media = TagNav.store.createRecord(TagNav.Media,
 			{ 
 				"_id": id,
@@ -152,9 +165,11 @@ TagNav.adminMediaController = SC.ArrayController.create(
 				"tags": []
 			}
 		);
+		media.set('date', SC.DateTime.create());
 		media.commitRecord();
 		
 		// Select the new media in the admin media grid.
+		TagNav.adminMediaArrayController._reload();
 		TagNav.adminMediaArrayController.selectObject(media);
 	}
 	
@@ -169,11 +184,15 @@ TagNav.adminMediaController = SC.ArrayController.create(
 	if (!media) {
 		// There is no media at all.
 		this.set('editableTags', null);
+		this.set('editableDate', null);
 	}
 	else if (media.get('length') == 1) {
 		var mediaRec = media.firstObject();
 		this.set('editableTags', mediaRec.get('tags').toString());
+		var date = mediaRec.get('date');
+		this.set('editableDate', date ? date.toFormattedString('%Y-%d-%m') : null);
 		this.set('selectedMediaTags', mediaRec.get('tags').toString());
+		this.set('selectedMediaDate', mediaRec.get('date'));
 		this.set('mediaID', mediaRec.get('_id'));
 		this.set('hasMediaToEdit', YES);
 		
@@ -186,6 +205,7 @@ TagNav.adminMediaController = SC.ArrayController.create(
 		
 		var aggrTagsArray = aggrTags.toArray();
 		this.set('editableTags', aggrTagsArray.toString());
+		this.set('editableDate', null);
 		this.set('selectedMediaTags', aggrTagsArray.toString());
 		this.set('hasMediaToEdit', YES);
 	}
@@ -198,10 +218,11 @@ TagNav.adminMediaController = SC.ArrayController.create(
 	if (hasMediaToEdit && media) {
 		var currTags = this.get('selectedMediaTags');
 		var editableTags = this.get('editableTags');
-		var hasChanged = (currTags != editableTags);
+		var hasTagsChanged = (currTags != editableTags);
+		var hasDateChanged = (this.get('selectedMediaDate') != this.get('editableDate'))
 		
-		this.setIfChanged('isAbleToSave', hasChanged);
+		this.setIfChanged('isAbleToSave', hasTagsChanged || hasDateChanged);
 	}
-  }.observes('editableTags')
+  }.observes('editableTags', 'editableDate')
 
 }) ;

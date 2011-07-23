@@ -62,7 +62,7 @@ TagNav.adminMediaPage = SC.Page.design({
 		editorView: SC.View.design({
 			layout: { right: 0, width: 300, top: 0, bottom: 0 },
 			backgroundColor: 'green',
-			childViews: 'newPanel labelEditInfo typeLabel typeText  tagsLabel tagsText  saveButton deleteButton singleTagLabel singleTagText singleTagAddButton singleTagRemoveButton totalMediaLabel totalMediaCount selMediaLabel selMediaCount'.w(),
+			childViews: 'newPanel labelEditInfo typeLabel typeText dateLabel dateText tagsLabel tagsText  saveButton deleteButton singleTagLabel singleTagText singleTagAddButton singleTagRemoveButton totalMediaLabel totalMediaCount selMediaLabel selMediaCount'.w(),
 			
 			newPanel: SC.View.design({
 				layout: { height: 200 },
@@ -82,21 +82,33 @@ TagNav.adminMediaPage = SC.Page.design({
 			}),
 			
 			labelEditInfo: SC.LabelView.design({
-				layout: { top: 120, height: 70, left: 10, right: 10 },
+				layout: { top: 120, height: 32, left: 10, right: 10 },
 				value: "_editLabelExplanation".loc()
 			}),
 						
 			typeLabel: SC.LabelView.design({
-				layout: { top: 200, right: 0, width: 50, height: 18 },
+				layout: { top: 160, right: 0, width: 50, height: 18 },
 				textAlign: SC.ALIGN_LEFT,
 				value: '_id'.loc()
 			}),
 			
 			typeText: SC.TextFieldView.design({
-				layout: { top: 200, left: 5, height: 20, width: 240 },
+				layout: { top: 160, left: 5, height: 20, width: 240 },
 				valueBinding: 'TagNav.adminMediaController.mediaID',
 				isEnabled: NO,
-				hit: 'Select media in the grid'
+				hint: 'Select media in the grid'
+			}),
+			
+			dateLabel: SC.LabelView.design({
+				layout: { top: 185, right: 0, width: 50, height: 18 },
+				textAlign: SC.ALIGN_LEFT,
+				value: '_date'.loc()
+			}),
+			
+			dateText: SC.TextFieldView.design({
+				layout: { top: 185, left: 5, height: 20, width: 240 },
+				valueBinding: 'TagNav.adminMediaController.editableDate',
+				hint: 'YYY-DD-MM'
 			}),
 			
 			tagsLabel: SC.LabelView.design({

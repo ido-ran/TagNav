@@ -119,7 +119,6 @@ TagNav.PicasaAlbumCoverListItemView = SC.View.extend(SC.ContentDisplay,
 	var photoIndex = ((mouseX - left) / photoSliceWidth);
 	photoIndex = Math.round(photoIndex);
 	
-	console.log(['move', left, mouseX, photoIndex]);
 	albumInfo.set('activeThumbnailIndex', photoIndex);
   }
 });

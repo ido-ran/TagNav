@@ -39,7 +39,13 @@ TagNav.adminMediaArrayController = SC.ArrayController.create(
 	this._calcTagsInFilter();
   }.observes('filterByTags'),
 
+  _reload: function() {
+	this._isInit = NO;
+	this.initialize();
+  },
+
   _calcTagsInFilter: function () {
+	console.log('filtering admin media');
     var self = this;
     var allMedias = this.get('_allMedia');
     var filterByTags = this.get('filterByTags');
@@ -81,8 +87,9 @@ TagNav.adminMediaArrayController = SC.ArrayController.create(
     // remove tags we already filter by.
  //   this.set('tagsInFilter', uniqTags);
 
-    var x = uniqMedia.toArray();
-    this.set('content', x);
+    var unsortMedia = uniqMedia.toArray();
+    var sortMedia = TagNav.SortMedia(unsortMedia);
+    this.set('content', sortMedia);
   },
 
   _addToTagHash: function (tagHash, itemTags, filterByTags) {

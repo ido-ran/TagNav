@@ -61,9 +61,9 @@ TagNav.mainPage = SC.Page.design({
 		    borderStyle: SC.BORDER_NONE,
 
 			contentView:SC.ListView.design({
-		contentBinding: 'TagNav.homeStripController.arrangedObjects',
-		exampleView: TagNav.HomeTagListItemView,
-		rowHeight: 240
+				contentBinding: 'TagNav.homeStripController.arrangedObjects',
+				exampleView: TagNav.HomeTagListItemView,
+				rowHeight: 240
 			})
       })
 	}),

@@ -27,6 +27,7 @@ TagNav.Media = SC.Record.extend(
   title: SC.Record.attr(String),
   type: SC.Record.attr(String),
   tags: SC.Record.attr(Array),
+  date: SC.Record.attr(SC.DateTime, { format: "%Y-%m-%d" }),
 
   /* Return the cover list item view
      for specific media type 
@@ -41,5 +42,23 @@ TagNav.Media = SC.Record.extend(
 		throw "Invalid media type";
 	}
 	return ev;
-  }.property('type').cacheable()
+  }.property('type').cacheable(),
 }) ;
+
+/*
+* Sort array of albums (media) by date and then title.
+*/
+TagNav.SortMedia = function(unsortAlbums) {
+    var sortAlbums = unsortAlbums.sort(function (x, y) {
+		var datex = x.get('date');
+		var datey = y.get('date');
+		if (!SC.none(datex) && !SC.none(datey)) {
+			return (-1) * SC.compare(datex, datey);
+		}
+		else if (!SC.none(datex) || !SC.none(datey)) {
+			return SC.none(datex) ? 1 : -1;
+		}
+    	return SC.compare(x.get('title'), y.get('title'));
+    });
+	return sortAlbums;
+}
