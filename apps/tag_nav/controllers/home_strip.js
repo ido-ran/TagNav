@@ -56,12 +56,15 @@ TagNav.homeStripController = SC.ArrayController.create(
       	});
 
 		var homeTags = [];
-		for (var tag in mediaByTag) {
-			var tagItem = TagNav.HomeTagItem.create();
-			tagItem.set('tag', tag);
-			tagItem.set('albums', TagNav.SortMedia(mediaByTag[tag]));
+		for (var idx = 0; idx < homeLabels.length; idx++) {
+			var tag = homeLabels[idx];
+			if (!SC.none(mediaByTag[tag])) {
+				var tagItem = TagNav.HomeTagItem.create();
+				tagItem.set('tag', tag);
+				tagItem.set('albums', TagNav.SortMedia(mediaByTag[tag]));
 
-			homeTags.push(tagItem);
+				homeTags.push(tagItem);
+			}
 		}
 		this.set('content', homeTags);
 	},
