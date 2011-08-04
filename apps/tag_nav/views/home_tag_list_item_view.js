@@ -13,17 +13,32 @@
 TagNav.HomeTagListItemView = SC.View.extend(
 /** @scope TagNav.HomeTagListItemView.prototype */ {
 
-	childViews: 'tagLabel albumsView'.w(),
+	backgroundColor: 'black',
+	childViews: 'tagImage tagLabel albumsView'.w(),
 	
-	tagLabel: SC.LabelView.design({
-		layout: { left: 0, right: 0, top: 0, height: 48 },
-		valueBinding: '.parentView.content.tag',
-		classNames: 'homeTagTitle',
+	tagImage: SC.ImageView.design({
+		layout: { left: 5, top: 15, height: 30, width: 30 },
+		value: static_url('tag.png'),
+		useCanvas: NO,
+		
+		tagBinding: '.parentView.content.tag',
 		
 		mouseDown: function(evt) {
-			var elem = this.$()[0];
-			var tag = SC.$(elem).text();
-			
+			var tag = this.get('tag');			
+			TagNav.navigatorController.filterByTags.pushObject(tag);
+			return YES;
+		}
+	}),
+	
+	tagLabel: SC.LabelView.design({
+		layout: { left: 50, right: 0, top: 0, height: 48 },
+		valueBinding: '.parentView.content.tag',
+		classNames: 'homeTagTitle',
+
+		tagBinding: '.parentView.content.tag',
+		
+		mouseDown: function(evt) {
+			var tag = this.get('tag');			
 			TagNav.navigatorController.filterByTags.pushObject(tag);
 			return YES;
 		}

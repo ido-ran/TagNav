@@ -23,7 +23,7 @@ TagNav.CouchDbDataSource = SC.DataSource.extend(
 	_dbpath: 'db',
 
 	 getServerPath: function(resourceName) {
-	   var path = '/' + this._dbpath + "//" + resourceName;
+	   var path = '/' + this._dbpath + "/" + resourceName;
 	   return path;
 	 },
 
@@ -147,9 +147,10 @@ console.log(['params', hash]);
   },
 
   createRecord: function(store, storeKey) {
-
+	var id = encodeURIComponent(store.idFor(storeKey));
+console.log(["createRecord", id]);
 	if (SC.kindOf(store.recordTypeFor(storeKey), TagNav.Media)) {
-		SC.Request.postUrl(this.getServerPath('/')).json()
+		SC.Request.putUrl(this.getServerPath(id)).json()
 		           .header('Accept', 'application/json')
 		           .notify(this, this.didCreateMedia, store, storeKey)
 		           .send(store.readDataHash(storeKey));

@@ -16,6 +16,9 @@ textarea.field {
 
 .sc-view.sc-list-item-view.tagnav-TagListItem:hover {
 	color: #FF5500;
+	background-image: static_url('tag.png');
+	background-repeat:no-repeat;
+	background-size:24px 24px;
 }
 
 .sc-view.sc-label-view.homeTagTitle {
