@@ -10,7 +10,7 @@
  
  @extends SC.ObjectController
  */
-TagNav.ItemsByTagController = SC.ObjectController.extend( /** @scope TagNav.navigatorController.prototype */ {
+TagNav.ItemsByTagController = SC.ArrayController.extend( /** @scope TagNav.navigatorController.prototype */ {
 
   // The content of this controller is set the array of all the media records.
   // array of strings

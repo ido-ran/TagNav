@@ -45,7 +45,7 @@ TagNav.HomeTagListItemView = SC.View.extend(
 	}),
 	
 	albumsView: SC.ScrollView.design({
-	    layout: { left: 0, right: 0, top: 50, bottom: 0 },
+	    layout: { left: 0, right: 0, top: 50, height: 200 },
 	    hasHorizontalScroller: YES,
         hasVerticalScroller: NO,
 	    borderStyle: SC.BORDER_NONE,

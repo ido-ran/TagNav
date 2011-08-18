@@ -35,6 +35,12 @@ TagNav.homeStripController = SC.ArrayController.create(
 	
 	_buildHomeDataStructure: function() {
 		var medias = this.get('allMedia');
+		
+		// We sort the albums by desc date to show the newest albums
+		// in the home strips.
+		medias = medias.toArray().sort(function (x, y) {
+	      return SC.compare(y.get('date'), x.get('date'));
+	    })
 		var homeLabels = this.get('homeLabels');
 		var mediaByTag = {};
 
