@@ -1,0 +1,10 @@
+1. Create new design-doc and enter the following into the source tab
+{"_id":"_design/app","language":"javascript","views":{"allMedia":{"map":"function(doc) {\n  if (doc.type != null) {\n    if (doc.type == 'picasa' || doc.type == 'youtube') {\n  emit(null, doc);\n}\n  }\n}"}},"rewrites":[{"from":"","to":"../deploy/index.html","method":"GET","query":{}},{"from":"/db/*","to":"../../*"},{"from":"/*","to":"../deploy/*"}]}
+
+2. Go into your server Configuration
+click on Add a new section at the bottom of the page
+enter the folllowing:
+section: vhosts 
+option: [your_dns such as photo.example.com]
+value: /tagnav/_design/app/_rewrite/
+

@@ -1,7 +1,0 @@
-{
-  "env": {
-    "default": {
-      "db": "http://ido.ran:twdbehm@einharodm.couchone.com/tagnav"
-    }
-  }
-}
